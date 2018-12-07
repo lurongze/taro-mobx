@@ -1,0 +1,27 @@
+.scrollViewX {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  .scrollXViewContainer {
+    position: relative;
+  }
+  .scrollXItem {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 15px;
+    border-bottom: 4px solid transparent;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .scrollXLine {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background-color: #409EFF;
+    color: #409EFF;
+    transition: left .3s cubic-bezier(.645, .045, .355, 1);
+  }
+}

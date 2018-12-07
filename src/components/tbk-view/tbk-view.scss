@@ -1,0 +1,73 @@
+.popup-header{
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  padding: 20px;
+  & .popup-image{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  & .popup-title{
+    display: inline-block;
+    box-sizing: border-box;
+    overflow: hidden;
+    //height: 150px;
+    max-width: 500px;
+    padding-left: 20px;
+    vertical-align: top;
+    & .title{
+      font-size: 28px;
+      line-height: 32px;
+      //height: 54px;
+      //overflow: hidden;
+      width: 100%;
+      color: #2c3e50;
+      //white-space: nowrap;
+      //text-overflow: ellipsis;
+    }
+    & .price{
+      font-size: 40px;
+      line-height: 60px;
+      width: 100%;
+      color: #f44;
+      & .stock{
+        display: inline-block;
+        font-size: 26px;
+        color: #333333;
+      }
+    }
+  }
+  & .popup-close{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+}
+
+.popup-content{
+  max-height: 800px;
+  min-height: 400px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding: 10px 0 150px 0;
+}
+.popup-footer{
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  position: absolute;
+  bottom: -1px; // 这里是为了在一些地方计算的时候，有可能会在底部出现一丝空白
+}
+.popup-button{
+  width: 50%;
+  display: inline-block;
+  background-color: #409EFF;
+  text-align: center;
+  font-size: 36px;
+  color: #FFFFFF;
+}
