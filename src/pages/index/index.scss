@@ -1,0 +1,237 @@
+.header{
+  display: block;
+  width: 100%;
+  height: 350px;
+  background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg');
+  background-size: cover;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+
+  & .logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg');
+    background-size: cover;
+  }
+
+  & .input-bg {
+    display: flex;
+    width: 600px;
+    height: 70px;
+    line-height: 70px;
+    background: rgba(255, 255, 255, .7);
+    border-radius: 10px;
+    margin-left: 20px;
+    padding: 0 50px 0 10px;
+    box-sizing: border-box;
+  }
+
+  & .icon {
+    width: 20%;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    font-size: 40px;
+    color: #333333;
+  }
+
+
+  & .search-input {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.title-block {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+
+  & .big-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg');
+    background-size: cover;
+    border: 5px solid rgba(255, 255, 255, .8);
+  }
+
+  & .site-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #ffffff;
+    font-size: 35px;
+
+    & .site-info-header {
+      display: flex;
+      justify-content: flex-end;
+
+      & .item {
+        border: 2px solid rgba(255, 255, 255, .8);
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        margin-left: 30px;
+
+        & .iconfont {
+          font-size: 40px;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  padding: 0 50px;
+  font-size: 30px;
+  color: #333333;
+  box-sizing: border-box;
+  background-color: #ffffff;
+
+  & .iconfont {
+    font-size: 40px;
+    margin-right: 10px;
+  }
+
+  & .notice-title {
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.list-item {
+  display: block;
+  width: 100%;
+  background-color: #ffffff;
+  margin-top: 10px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+
+  & .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    line-height: 80px;
+    width: 100%;
+
+    & .list-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg');
+      background-size: cover;
+    }
+
+    & .list-title {
+      flex: 10;
+      box-sizing: border-box;
+      padding: 0 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 30px;
+
+      & .list-level{
+        font-size: 20px;
+        color: #58B7FF;
+        border: 1px solid #58B7FF;
+        padding: 0 5px;
+        box-sizing: border-box;
+      }
+    }
+
+    & .iconfont {
+      flex: 2;
+      text-align: center;
+      font-size: 40px;
+    }
+  }
+
+  & .list-desc {
+    color: #333333;
+    font-size: 35px;
+    line-height: 1.2rem;
+
+    & .item-cate {
+      color: #20A0FF;
+    }
+  }
+
+  & .list-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    & .gallery-item {
+      margin-top: 30px;
+      width: 32%;
+      height: 32vw;
+    }
+
+    & .gallery-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+
+  & .list-footer {
+    width: 100%;
+    display: flex;
+    height: 80px;
+    margin-top: 15px;
+    align-items: center;
+
+    & .iconfont {
+      font-size: 50px;
+      flex: 2;
+      text-align: center;
+      position: relative;
+
+      & .like-count {
+        position: absolute;
+        right: 0;
+        top: -50%;
+        font-size: 25px;
+        color: #ffffff;
+        padding: 5px 10px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 13px;
+        background-color: #FF4949;
+      }
+    }
+
+    & .list-time {
+      flex: 10;
+      color: #333333;
+      font-size: 25px;
+    }
+  }
+
+
+}
+
+

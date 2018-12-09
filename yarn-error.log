@@ -1,14 +1,14 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @utils/helper --silent --no-progress
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js dev:weapp
 
 PATH: 
-  C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;F:\workspace\taro\cos-gallery\node_modules\.bin;F:\workspace\taro\cos-gallery\node_modules\.bin;C:\Users\gz000172\AppData\Local\Yarn\config\link\node_modules\.bin;F:\workspace\taro\cos-gallery\node_modules\.bin;C:\Users\gz000172\AppData\Local\Yarn\config\link\node_modules\.bin;C:\Program Files\lib\node_modules\npm\bin\node-gyp-bin;C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;G:\Oracle\product\10.1.0\Client_1\bin;G:\Oracle\product\10.1.0\Client_1\jre\1.4.2\bin\client;G:\Oracle\product\10.1.0\Client_1\jre\1.4.2\bin;G:\app\gz000172\product\11.2.0\client_1\bin;C:\Apps\lrz\product\11.2.0\client_1;C:\app\lrz\product\11.2.0\client_1;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Java\jdk1.6.0_38\bin;C:\Program Files\Java\jdk1.6.0_38\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Yarn\bin;C:\HashiCorp\Vagrant\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs\;C:\Users\gz000172\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\gz000172\AppData\Local\Programs\Python\Python37\;C:\Users\gz000172\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\bin;C:\Users\gz000172\AppData\Local\Yarn\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\gz000172\AppData\Local\Programs\Fiddler;C:\Users\gz000172\AppData\Roaming\npm
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\HashiCorp\Vagrant\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;C:\Users\Administrator\AppData\Local\Yarn\bin
 
 Yarn version: 
-  1.3.2
+  1.5.1
 
 Node version: 
-  8.14.0
+  10.14.1
 
 Platform: 
   win32 x64
@@ -7910,14 +7910,16 @@ Lockfile:
     resolved "http://registry.npm.taobao.org/yesno/download/yesno-0.0.1.tgz#ffbc04ff3d6f99dad24f7463134e9b92ae41bef6"
 
 Trace: 
-  Error: https://registry.npm.taobao.org/@utils%2fhelper: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:62098:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:123085:22)
-      at emitTwo (events.js:126:13)
-      at Request.emit (events.js:214:7)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:124068:10)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:123988:12)
-      at Object.onceWrapper (events.js:313:30)
-      at emitNone (events.js:111:20)
+  Error: Command failed.
+  Exit code: 3221225786
+  Command: C:\WINDOWS\system32\cmd.exe
+  Arguments: /d /s /c npm run build:weapp -- --watch
+  Directory: F:\workspace\taro\taro-mobx
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
+      at ChildProcess.emit (events.js:182:13)
+      at maybeClose (internal/child_process.js:962:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:251:5)

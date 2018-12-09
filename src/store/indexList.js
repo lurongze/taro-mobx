@@ -4,7 +4,7 @@ configure({ enforceActions: 'always' })
 
 class indexList {
 
-  @observable list = 0
+  @observable list = [ ...Array(9).keys()]
 
   @action modifyList() {
     this.list = [ ...Array(100).keys()]
