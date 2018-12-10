@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { View, Input, Text, Image } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
+import Gallery from '../../components/gallery/gallery'
 import helper from '../../utils/helper'
 import './index.scss'
 
@@ -83,7 +84,7 @@ class Index extends Taro.Component {
           {
             list.map((item) => {
               return (
-                <View className='list-item' key={item}>
+                <View className='list-item' key={item.toString()}>
                   <View className='list-header'>
                     <View className='list-avatar' />
                     <View className='list-title'>
@@ -95,21 +96,7 @@ class Index extends Taro.Component {
                   <View className='list-desc'>
                     <Text className='item-cate'>#cosplay#</Text>这是我的第一套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！
                   </View>
-                  <View className='list-gallery'>
-                    {
-                      list.map((e) => {
-                        return (
-                          <View className='gallery-item' key={e}>
-                            {
-                              e < 8 && (
-                                <Image className='gallery-image' src={image} />
-                              )
-                            }
-                          </View>
-                        )
-                      })
-                    }
-                  </View>
+                  <Gallery list={item} />
                   <View className='list-footer'>
                     <View className='list-time'>2018/09/12 12:13</View>
                     <View className='iconfont icon-pinglun' />
