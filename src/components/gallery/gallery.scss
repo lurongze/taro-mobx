@@ -3,9 +3,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
-
+  margin-top: 20px;
+  
   & .gallery3-big {
     width: 66%;
+    & .w3 {
+      padding-bottom: 100%;
+    }
   }
 
   & .gallery3-small {
@@ -13,10 +17,19 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    & .w3 {
+      padding-bottom: 100%;
+    }
   }
 
   & .gallery4-big {
     width: 74.75%;
+
+    & .w4 {
+      padding-bottom: 100%;
+    }
+
   }
 
   & .gallery4-small {
@@ -24,7 +37,12 @@
     flex-direction: column;
     justify-content: space-between;
     width: 24.25%;
+
+    & .w4 {
+      padding-bottom: 100%;
+    }
   }
+
 
   & .gallery5-big {
     width: 74.75%;
@@ -42,8 +60,6 @@
     overflow: hidden;
     height: 0;
     background-size: cover;
-    //width: 100%;
-    //padding-bottom: 100%;
 
     &.w1 {
       width: 100%;
@@ -55,7 +71,8 @@
       padding-bottom: 49%;
     }
 
-    &.w7,&.w8,&.w9 {
+    &.w5, &.w6, &.w7, &.w8, &.w9 {
+      margin-bottom: 2%;
       width: 32%;
       padding-bottom: 32%;
     }
