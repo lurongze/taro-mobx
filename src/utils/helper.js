@@ -5,6 +5,10 @@ const sessionKey = 'taro-js-session'
 let reLoginTime = 1;
 const helper = {
 
+  isEmpty(value) {
+    return typeof value === 'undefined' || value === null || value === ''
+  },
+
   debounce(fn, delay = 500) { // 防抖执行函数
     let handle;
     return function (e) {

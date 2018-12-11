@@ -41,7 +41,7 @@
     text-align: center;
     line-height: 70px;
     font-size: 40px;
-    color: #333333;
+    color: #606266;
   }
 
 
@@ -104,7 +104,7 @@
   line-height: 80px;
   padding: 0 50px;
   font-size: 30px;
-  color: #333333;
+  color: #606266;
   box-sizing: border-box;
   background-color: #ffffff;
 
@@ -120,11 +120,16 @@
   }
 }
 
+.tab-list {
+  background-color: #ffffff;
+  margin-top: 20px;
+}
+
 .list-item {
   display: block;
   width: 100%;
   background-color: #ffffff;
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 15px 20px;
   box-sizing: border-box;
 
@@ -151,6 +156,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-size: 30px;
+      color: #303133;
 
       & .list-level{
         font-size: 20px;
@@ -169,7 +175,7 @@
   }
 
   & .list-desc {
-    color: #333333;
+    color: #606266;
     font-size: 35px;
     line-height: 1.2rem;
 
@@ -207,12 +213,38 @@
 
     & .list-time {
       flex: 10;
-      color: #333333;
+      color: #606266;
       font-size: 25px;
     }
   }
 
+  & .list-comment {
+    font-size: 30px;
+    & .comment-item {
+      color: #606266;
+      margin-top: 15px;
+      line-height: 1.2rem;
 
+      & .commenter-name {
+        color: #20A0FF;
+      }
+    }
+  }
+
+}
+
+.publishButton {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100px;
+  background-color: #20A0FF;
+  color: #ffffff;
+  font-size: 30px;
+  right: 15px;
+  bottom: 15px;
 }
 
 

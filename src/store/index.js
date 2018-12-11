@@ -1,12 +1,18 @@
 /*
 * 所有的stores都放到这里来整合吧
 * */
-import counterStore from './counter'
-import indexList from './indexList'
+import commonStore from './commonStore'
+import counterStore from './counterStore'
+import indexStore from './indexStore'
+import publishStore from './publishStore'
+import commentStore from './commentStore'
 
 const stores = {
   counterStore,
-  indexList
+  indexStore,
+  commentStore,
+  commonStore,
+  publishStore
 }
 
 export default stores;

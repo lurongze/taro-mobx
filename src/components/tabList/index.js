@@ -1,8 +1,8 @@
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { View, ScrollView } from '@tarojs/components'
 import './index.scss'
 
-export default class Index extends Component {
+export default class Index extends Taro.Component {
   constructor (props) {
     super(props)
     this.setState({
@@ -57,7 +57,7 @@ Index.defaultProps = {
     {id: 2, text: 'x12'},
     {id: 3, text: 'x1'},
     {id: 4, text: '11qeq1qeqx'},
-    {id: 5, text: '1qeq1qeq1qeq1qeq1qeq1qeq1qeq1qeq1qeq'},
+    {id: 5, text: '1qeq1qeq1qe'},
     {id: 6, text: '1e2'},
     {id: 7, text: 'vwv1'},
     {id: 8, text: '1qwe12'},

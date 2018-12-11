@@ -1,0 +1,31 @@
+@import '../publish/index';
+
+.comment-desc {
+  display: flex;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e5e5e5;
+  justify-content: space-between;
+  margin-top: 50px;
+
+  & .avatar {
+    height: 0;
+    width: 20%;
+    padding-bottom: 20%;
+    background-size: cover;
+    border-radius: 20px;
+  }
+
+  & .desc {
+    font-size: 30px;
+    color: #606266;
+    width: 75%;
+    line-height: 1.2rem;
+
+    & .name {
+      color: #20A0FF;
+    }
+  }
+
+}
