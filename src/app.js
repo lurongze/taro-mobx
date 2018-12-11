@@ -21,7 +21,8 @@ class App extends Component {
     pages: [
       'pages/index/index',
       'pages/publish/index',
-      'pages/comment/index'
+      'pages/comment/index',
+      'pages/detail/index'
     ],
     window: {
       backgroundTextStyle: 'black',

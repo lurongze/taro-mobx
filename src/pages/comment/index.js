@@ -50,7 +50,11 @@ class Comment extends Taro.Component {
           <Textarea className='textarea' onInput={this.changeValue.bind(this)} />
         </View>
         <View className='comment-desc'>
-          <View className='avatar' style={{backgroundImage: `url(${preUserInfo.avatar})`}} />
+          {
+            preUserInfo.avatar && (
+              <View className='avatar' style={{backgroundImage: `url(${preUserInfo.avatar})`}} />
+            )
+          }
           <View className='desc'>
             <View className='name'>@{preUserInfo.name}</View>
             <View className='info'>{preUserInfo.desc}</View>

@@ -238,13 +238,14 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  text-align: center;
-  line-height: 100px;
   background-color: #20A0FF;
   color: #ffffff;
   font-size: 30px;
   right: 15px;
   bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

@@ -55,6 +55,18 @@ class Index extends Taro.Component {
     })
   }
 
+  goDetail = (item) => {
+    this.props.commonStore.setPreUserId({
+      name: '柳岩' + item,
+      desc: '这是我的第999套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！',
+      avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg',
+      item: item
+    });
+    return Taro.navigateTo({
+      url: '/pages/detail/index'
+    })
+  }
+
   goPublish = () => {
     return Taro.navigateTo({
       url: '/pages/publish/index'
@@ -97,7 +109,7 @@ class Index extends Taro.Component {
           {
             list.map((item) => {
               return (
-                <View className='list-item' key={item.toString()}>
+                <View className='list-item' key={item.toString()} onClick={this.goDetail.bind(this, item)}>
                   <View className='list-header'>
                     <View className='list-avatar' />
                     <View className='list-title'>

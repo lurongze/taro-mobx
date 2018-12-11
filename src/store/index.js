@@ -6,12 +6,14 @@ import counterStore from './counterStore'
 import indexStore from './indexStore'
 import publishStore from './publishStore'
 import commentStore from './commentStore'
+import detailStore from './detailStore'
 
 const stores = {
   counterStore,
   indexStore,
   commentStore,
   commonStore,
+  detailStore,
   publishStore
 }
 
