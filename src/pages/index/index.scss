@@ -137,15 +137,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
-    line-height: 80px;
     width: 100%;
+    padding: 15px 0;
 
     & .list-avatar {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg');
       background-size: cover;
     }
 
@@ -157,6 +155,13 @@
       text-overflow: ellipsis;
       font-size: 30px;
       color: #303133;
+      display: flex;
+      flex-direction: column;
+      
+      & .list-time {
+        font-size: 25px;
+        color: #909399;
+      }
 
       & .list-level{
         font-size: 20px;
@@ -190,47 +195,23 @@
     height: 80px;
     margin-top: 30px;
     align-items: center;
+    justify-content: space-evenly;
+    border-top: 1px solid #e5e5e5;
 
-    & .iconfont {
-      font-size: 50px;
-      flex: 2;
-      text-align: center;
-      position: relative;
+    & .footer-action {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      color: #909399;
 
-      & .like-count {
-        position: absolute;
-        right: 0;
-        top: -50%;
-        font-size: 25px;
-        color: #ffffff;
-        padding: 5px 10px;
-        height: 25px;
-        line-height: 25px;
-        border-radius: 13px;
-        background-color: #FF4949;
+      & .iconfont {
+        font-size: 50px;
       }
     }
 
-    & .list-time {
-      flex: 10;
-      color: #606266;
-      font-size: 25px;
-    }
   }
-
-  & .list-comment {
-    font-size: 30px;
-    & .comment-item {
-      color: #606266;
-      margin-top: 15px;
-      line-height: 1.2rem;
-
-      & .commenter-name {
-        color: #20A0FF;
-      }
-    }
-  }
-
 }
 
 .publishButton {

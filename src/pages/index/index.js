@@ -6,6 +6,7 @@ import TabList from '../../components/tabList/index'
 import helper from '../../utils/helper'
 import './index.scss'
 
+const image = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg'
 @inject('indexStore', 'commonStore')
 @observer
 class Index extends Taro.Component {
@@ -47,7 +48,7 @@ class Index extends Taro.Component {
     this.props.commonStore.setPreUserId({
       name: '柳岩' + item,
       desc: '这是我的第999套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！',
-      avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg',
+      avatar: image,
       item: item
     });
     return Taro.navigateTo({
@@ -59,7 +60,7 @@ class Index extends Taro.Component {
     this.props.commonStore.setPreUserId({
       name: '柳岩' + item,
       desc: '这是我的第999套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！',
-      avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg',
+      avatar: image,
       item: item
     });
     return Taro.navigateTo({
@@ -111,10 +112,10 @@ class Index extends Taro.Component {
               return (
                 <View className='list-item' key={item.toString()} onClick={this.goDetail.bind(this, item)}>
                   <View className='list-header'>
-                    <View className='list-avatar' />
+                    <View className='list-avatar' style={{backgroundImage: `url(${image})`}} />
                     <View className='list-title'>
-                      冯提莫
-                      <Text className='list-level'>lv5</Text>
+                      <View className='list-user'>冯提莫<Text className='list-level'>lv5</Text></View>
+                      <View className='list-time'>2018/09/12 12:13</View>
                     </View>
                     <View className='iconfont icon-gengduo' />
                   </View>
@@ -123,16 +124,14 @@ class Index extends Taro.Component {
                   </View>
                   <Gallery list={item} />
                   <View className='list-footer'>
-                    <View className='list-time'>2018/09/12 12:13</View>
-                    <View onClick={this.goComment.bind(this, item)} className='iconfont icon-pinglun' />
-                    <View className='iconfont icon-dianzan'><Text className='like-count'>500</Text></View>
-                  </View>
-                  <View className='list-comment'>
-                    <View className='comment-item'>
-                      <Text className='commenter-name'>沈腾</Text>：哈哈哈，这组照片很好看，美美的
+                    <View className='footer-action'>
+                      <Text className='iconfont icon-gonggao' /> 分享
                     </View>
-                    <View className='comment-item'>
-                      <Text className='commenter-name'>柳岩</Text>：谢谢，我会继续努力的谢谢，我会继续努力的谢谢，我会继续努力的谢谢，我会继续努力的谢谢，我会继续努力的谢谢，我会继续努力的谢谢，我会继续努力的
+                    <View className='footer-action' onClick={this.goComment.bind(this, item)}>
+                      <Text className='iconfont icon-pinglun' /> 评论
+                    </View>
+                    <View className='footer-action'>
+                      <Text className='iconfont icon-dianzan' /> 点赞
                     </View>
                   </View>
                 </View>

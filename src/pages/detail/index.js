@@ -24,8 +24,13 @@ class Detail extends Taro.Component {
 
   componentDidHide () { }
 
+  changeTab = (key) => {
+    this.props.detailStore.setCurrentTab(key)
+  }
+
   render () {
-    const list = [...Array(15).keys()]
+    const { detailStore: { currentTab } } = this.props
+    const list = [...Array(20).keys()]
     return (
       <View className='index'>
         <View className='header'>
@@ -45,12 +50,53 @@ class Detail extends Taro.Component {
         </View>
         <View className='picture-list'>
           {
-            list.map((n) => {
+            list.filter((n) => {
+              return n < 4
+            }).map((n) => {
               return (
                 <Image className='image-item' key={n} src={image} mode='widthFIx' />
               )
             })
           }
+        </View>
+        <View className='custom-block'>
+          <View className='tab-list'>
+            <View onClick={this.changeTab.bind(this, 'comment')} className={`tab-item ${currentTab === 'comment' ? 'active' : ''}`}>评论100</View>
+            <View onClick={this.changeTab.bind(this, 'like')} className={`tab-item ${currentTab === 'like' ? 'active' : ''}`}>点赞99</View>
+          </View>
+
+          <View className={`comment-list ${currentTab === 'comment' ? 'active' : ''}`}>
+            {
+              list.map((n) => {
+                return (
+                  <View className='comment-list-item' key={n}>
+                    <Image className='comment-avatar' src={image} />
+                    <View className='comment-block'>
+                      <View className='comment-title'>
+                        <View className='comment-name'>柳岩</View>
+                      </View>
+                      <View className='comment-content'>
+                        <Text className='comment-to'>@冯提莫</Text>
+                        这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay
+                      </View>
+                      <View className='comment-time'>2018/09/12</View>
+                    </View>
+                  </View>
+                )
+              })
+            }
+          </View>
+
+          <View className={`like-list ${currentTab === 'like' ? 'active' : ''}`}>
+            {
+              list.map((n) => {
+                return (
+                  <Image key={n} className='like-avatar' src={image} />
+                )
+              })
+            }
+          </View>
+
         </View>
         <View className='action-list'>
           <View className='action-item iconfont icon-dianzan' />
