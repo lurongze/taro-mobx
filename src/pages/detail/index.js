@@ -70,16 +70,16 @@ class Detail extends Taro.Component {
               list.map((n) => {
                 return (
                   <View className='comment-list-item' key={n}>
-                    <Image className='comment-avatar' src={image} />
                     <View className='comment-block'>
+                      <Image className='comment-avatar' src={image} />
                       <View className='comment-title'>
                         <View className='comment-name'>柳岩</View>
+                        <View className='comment-time'>2018/09/12</View>
                       </View>
-                      <View className='comment-content'>
-                        <Text className='comment-to'>@冯提莫</Text>
-                        这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay
-                      </View>
-                      <View className='comment-time'>2018/09/12</View>
+                    </View>
+                    <View className='comment-content'>
+                      <Text className='comment-to'>@冯提莫</Text>
+                      这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay
                     </View>
                   </View>
                 )
