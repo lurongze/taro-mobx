@@ -22,14 +22,35 @@ class App extends Component {
       'pages/index/index',
       'pages/publish/index',
       'pages/comment/index',
-      'pages/detail/index'
+      'pages/detail/index',
+      'pages/user/index'
     ],
     window: {
       backgroundTextStyle: 'black',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
-    }
+    },
+    tabBar: {
+      color: '#606266',
+      selectedColor: '#20A0FF',
+      borderStyle: 'black',
+      backgroundColor: '#ffffff',
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          iconPath: 'assets/images/tab/user.jpg',
+          selectedIconPath: 'assets/images/tab/user.jpg',
+          text: '首页'
+        },
+        {
+          pagePath: 'pages/user/index',
+          iconPath: 'assets/images/tab/home.jpg',
+          selectedIconPath: 'assets/images/tab/home.jpg',
+          text: '我的'
+        }
+      ]
+    },
   }
 
   componentDidMount () {}

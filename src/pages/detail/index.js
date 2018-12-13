@@ -3,7 +3,6 @@ import { View, Text, Image } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 import './index.scss'
 
-const image = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg'
 @inject('detailStore', 'commonStore')
 @observer
 class Detail extends Taro.Component {
@@ -29,12 +28,12 @@ class Detail extends Taro.Component {
   }
 
   render () {
-    const { detailStore: { currentTab } } = this.props
+    const { detailStore: { currentTab }, commonStore: { defaultAvatar } } = this.props
     const list = [...Array(20).keys()]
     return (
       <View className='index'>
         <View className='header'>
-          <View className='avatar' style={{backgroundImage: `url(${image})`}} />
+          <View className='avatar' style={{backgroundImage: `url(${defaultAvatar})`}} />
           <View className='info'>
             <View className='name'>
               柳岩<Text className='level'>lv1</Text>
@@ -54,7 +53,7 @@ class Detail extends Taro.Component {
               return n < 4
             }).map((n) => {
               return (
-                <Image className='image-item' key={n} src={image} mode='widthFIx' />
+                <Image className='image-item' key={n} src={defaultAvatar} mode='widthFIx' />
               )
             })
           }
@@ -67,19 +66,21 @@ class Detail extends Taro.Component {
 
           <View className={`comment-list ${currentTab === 'comment' ? 'active' : ''}`}>
             {
-              list.map((n) => {
+              list.filter((n) => {
+                return n < 4
+              }).map((n) => {
                 return (
                   <View className='comment-list-item' key={n}>
+                    <Image className='comment-avatar' src={defaultAvatar} />
                     <View className='comment-block'>
-                      <Image className='comment-avatar' src={image} />
                       <View className='comment-title'>
                         <View className='comment-name'>柳岩</View>
-                        <View className='comment-time'>2018/09/12</View>
                       </View>
-                    </View>
-                    <View className='comment-content'>
-                      <Text className='comment-to'>@冯提莫</Text>
-                      这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay
+                      <View className='comment-content'>
+                        <Text className='comment-to'>@冯提莫</Text>
+                        这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay
+                      </View>
+                      <View className='comment-time'>2018/09/12</View>
                     </View>
                   </View>
                 )
@@ -91,7 +92,7 @@ class Detail extends Taro.Component {
             {
               list.map((n) => {
                 return (
-                  <Image key={n} className='like-avatar' src={image} />
+                  <Image key={n} className='like-avatar' src={defaultAvatar} />
                 )
               })
             }
