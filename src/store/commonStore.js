@@ -1,3 +1,4 @@
+import Taro from '@tarojs/taro'
 import { observable, action, configure, runInAction } from 'mobx'
 
 configure({ enforceActions: 'always' })
@@ -8,8 +9,21 @@ class commonStore {
 
   @observable preUserInfo = {}
 
+  @observable version = '1213'
+
   @action setPreUserId = (value) => {
     this.preUserInfo = value
+  }
+
+  @action setVersion = (value) => {
+    this.version = value
+  }
+
+  @action login = async () => {
+    const login = await Taro.login()
+    runInAction(() => {
+      this.preUserInfo = login
+    })
   }
 
 }

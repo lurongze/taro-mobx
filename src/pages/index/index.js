@@ -1,12 +1,14 @@
 import Taro from '@tarojs/taro'
 import { View, Input, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
+import withLogin from '../../hoc/withLogin'
 import Gallery from '../../components/gallery/gallery'
 import TabList from '../../components/tabList/index'
 import helper from '../../utils/helper'
 import './index.scss'
 
 const image = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg'
+@withLogin()
 @inject('indexStore', 'commonStore')
 @observer
 class Index extends Taro.Component {
@@ -21,7 +23,9 @@ class Index extends Taro.Component {
     console.log('componentWillReact')
   }
 
-  componentDidMount () { }
+  componentDidMount () {
+    console.log('index-componentDidMount')
+  }
 
   componentWillUnmount () { }
 
@@ -75,7 +79,7 @@ class Index extends Taro.Component {
   }
 
   render () {
-    const { indexStore: { list, listType } } = this.props
+    const { indexStore: { list, listType }, commonStore: { version } } = this.props
     return (
       <View className='index'>
         <View className='header'>
@@ -99,7 +103,7 @@ class Index extends Taro.Component {
         </View>
         <View className='notice' onClick={this.navigateTo.bind(this, '/pages/publish/index')}>
           <Text className='iconfont icon-gonggao' />
-          <Text className='notice-title'>公告：淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线</Text>
+          <Text className='notice-title'>{version}公告：淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线</Text>
         </View>
 
         <View className='tab-list'>

@@ -54,6 +54,10 @@ class publish extends Taro.Component {
     const res = publishStore.submit();
   }
 
+  cancel = () => {
+    return Taro.navigateBack()
+  }
+
   render () {
     const { publishStore: { categories, category, pictureList } } = this.props
 
@@ -89,7 +93,7 @@ class publish extends Taro.Component {
         </View>
         <View className='action-list'>
           <View onClick={this.submit.bind(this)} className='action-submit action-button'>提    交</View>
-          <View className='action-cancel action-button'>取    消</View>
+          <View onClick={this.cancel.bind(this)} className='action-cancel action-button'>取    消</View>
         </View>
       </View>
     )

@@ -1,4 +1,4 @@
-import { observable, action, configure, runInAction } from 'mobx'
+import { observable, action, configure } from 'mobx'
 
 configure({ enforceActions: 'always' })
 

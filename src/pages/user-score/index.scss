@@ -5,7 +5,8 @@
   justify-content: flex-start;
   align-items: center;
   background-color: #ffffff;
-
+  flex-direction: column;
+  padding-bottom: 30px;
   color: #606266;
 
   & .title {
@@ -35,10 +36,16 @@
     & .count {
       text-align: right;
       flex: 5;
+      padding-right: 20px;
+      box-sizing: border-box;
     }
     & .title {
       flex: 10;
     }
+  }
+
+  & .list:last-child {
+    border-bottom: none;
   }
 
 }

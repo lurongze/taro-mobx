@@ -8,6 +8,7 @@ import publishStore from './publishStore'
 import commentStore from './commentStore'
 import detailStore from './detailStore'
 import userStore from './userStore'
+import userScoreStore from './userScoreStore'
 
 const stores = {
   counterStore,
@@ -16,6 +17,7 @@ const stores = {
   commonStore,
   detailStore,
   userStore,
+  userScoreStore,
   publishStore
 }
 

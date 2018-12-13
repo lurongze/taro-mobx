@@ -38,7 +38,7 @@ class userScore extends Taro.Component {
               return (
                 <View className='list' key={n}>
                   <View className='title'>我的点赞</View>
-                  <View className='count'>7</View>
+                  <View className='count'>+7</View>
                 </View>
               )
             })

@@ -23,7 +23,8 @@ class App extends Component {
       'pages/publish/index',
       'pages/comment/index',
       'pages/detail/index',
-      'pages/user/index'
+      'pages/user/index',
+      'pages/user-score/index'
     ],
     window: {
       backgroundTextStyle: 'black',

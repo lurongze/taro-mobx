@@ -40,6 +40,10 @@ class Comment extends Taro.Component {
     const res = commentStore.submit();
   }
 
+  cancel = () => {
+    return Taro.navigateBack()
+  }
+
   render () {
 
     const { commonStore: { preUserInfo } } = this.props
@@ -62,7 +66,7 @@ class Comment extends Taro.Component {
         </View>
         <View className='action-list'>
           <View onClick={this.submit.bind(this)} className='action-submit action-button'>提    交</View>
-          <View className='action-cancel action-button'>取    消</View>
+          <View onClick={this.cancel.bind(this)} className='action-cancel action-button'>取    消</View>
         </View>
       </View>
     )
