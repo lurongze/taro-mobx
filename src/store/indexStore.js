@@ -18,11 +18,11 @@ class indexStore {
 
   @observable listType = 'all' // 首页列表分类
 
-  @action modifyList() {
+  @action modifyList = () => {
     this.list = [ ...Array(100).keys()]
   }
 
-  @action setListType(type) {
+  @action setListType = (type) => {
     this.listType = type
   }
 

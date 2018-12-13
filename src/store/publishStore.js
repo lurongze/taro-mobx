@@ -23,25 +23,25 @@ class publishStore {
 
   @observable textAreaValue = '' // 文本框
 
-  @action.bound setCategory(cate) {
+  @action.bound setCategory = (cate) => {
     this.category = cate
   }
 
-  @action.bound setTextAreaValue(value) {
+  @action.bound setTextAreaValue = (value) => {
     this.textAreaValue = value
   }
 
-  @action.bound addPicture(picture) {
+  @action.bound addPicture = (picture) => {
     this.pictureList = [...this.pictureList, picture]
   }
 
-  @action.bound removePicture(picture) {
+  @action.bound removePicture = (picture) => {
     this.pictureList = this.pictureList.filter((item) => {
       return item !== picture
     })
   }
 
-  @action.bound checkParams() {
+  @action.bound checkParams = () => {
     if (helper.isEmpty(this.textAreaValue)) {
       return '请填写内容'
     }
@@ -50,7 +50,7 @@ class publishStore {
     }
   }
 
-  @action.bound submit() {
+  @action.bound submit = () => {
     console.log('textAreaValue', this.textAreaValue, this.category, this.pictureList)
   }
 

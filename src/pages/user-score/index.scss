@@ -6,25 +6,16 @@
   align-items: center;
   background-color: #ffffff;
 
-  & .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-left: 20px;
+  color: #606266;
+
+  & .title {
+    font-size: 35px;
   }
 
-  & .name {
-    font-size: 35px;
-    color: #606266;
-    margin-left: 20px;
-
-    & .level {
-      padding: 2px 10px;
-      border: 1px solid #20A0FF;
-      border-radius: 2px;
-      color: #20A0FF;
-      font-size: 20px;
-    }
+  & .score {
+    margin-top: 15px;
+    font-size: 45px;
+    font-weight: bold;
   }
 }
 
@@ -39,16 +30,7 @@
     align-items: center;
     font-size: 30px;
     color: #606266;
-
-    & .icon {
-      font-size: 40px;
-      width: 80px;
-      text-align: center;
-    }
-
-    & .icon:last-child {
-      color: #909399;
-    }
+    justify-content: space-between;
 
     & .count {
       text-align: right;

@@ -9,11 +9,11 @@ class detailStore {
   @observable item = {}
 
 
-  @action.bound detailStore() {
+  @action.bound detailStore = () => {
     this.item = {}
   }
 
-  @action.bound setCurrentTab(value) {
+  @action.bound setCurrentTab = (value) => {
     this.currentTab = value
   }
 

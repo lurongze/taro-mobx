@@ -3,12 +3,12 @@ import { View, Image, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 import './index.scss'
 
-@inject('userStore', 'commonStore')
+@inject('userScoreStore', 'commonStore')
 @observer
-class user extends Taro.Component {
+class userScore extends Taro.Component {
 
   config = {
-    navigationBarTitleText: '个人中心'
+    navigationBarTitleText: '会员积分'
   }
 
   componentWillMount () { }
@@ -23,32 +23,22 @@ class user extends Taro.Component {
 
   componentDidHide () { }
 
-  viewUserScore = (url) => {
-    return Taro.navigateTo({
-      url: url
-    })
-  }
-
   render () {
-
-    const { commonStore: { defaultAvatar } } = this.props
 
     return (
       <View className='index'>
         <View className='header'>
-          <Image className='avatar' src={defaultAvatar} />
-          <View className='name'>柳岩<Text className='level'>lv5</Text></View>
+          <View className='title'>积分</View>
+          <View className='score'>998</View>
         </View>
 
         <View className='block'>
           {
             [1,2,3,4,5].map((n) => {
               return (
-                <View onClick={this.viewUserScore.bind(this, '/pages/user-score/index')} className='list' key={n}>
-                  <View className='icon iconfont icon-Sign' />
+                <View className='list' key={n}>
                   <View className='title'>我的点赞</View>
                   <View className='count'>7</View>
-                  <View className='icon iconfont icon-gonggao' />
                 </View>
               )
             })
@@ -59,4 +49,4 @@ class user extends Taro.Component {
   }
 }
 
-export default user
+export default userScore

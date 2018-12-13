@@ -8,7 +8,7 @@ class commonStore {
 
   @observable preUserInfo = {}
 
-  @action setPreUserId(value) {
+  @action setPreUserId = (value) => {
     this.preUserInfo = value
   }
 

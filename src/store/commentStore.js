@@ -13,11 +13,11 @@ class commentStore {
     }
   }
 
-  @action.bound setTextAreaValue(value) {
+  @action.bound setTextAreaValue = (value) => {
     this.textAreaValue = value
   }
 
-  @action.bound submit() {
+  @action.bound submit = () => {
     console.log('textAreaValue', this.textAreaValue )
   }
 }

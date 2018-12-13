@@ -6,15 +6,15 @@ class userStore {
 
   @observable counter = 0
 
-  @action increment() {
+  @action increment = () => {
     this.counter ++
   }
 
-  @action decrement() {
+  @action decrement = () => {
     this.counter --
   }
 
-  @action.bound incrementAsync() {
+  @action.bound incrementAsync = () => {
     setTimeout(() => {
       runInAction(() => {
         this.counter ++
