@@ -1,4 +1,6 @@
-import { observable, action, configure, /*runInAction*/ } from 'mobx'
+import { observable, action, configure, runInAction } from 'mobx'
+
+import { getList } from '../service/index'
 
 configure({ enforceActions: 'always' })
 
@@ -6,22 +8,27 @@ class indexStore {
 
   @observable loadingList = false
 
-  @observable list = [
-    [1],
-    [1, 2],
-    [1, 2, 3],
-    [1, 2, 3, 4],
-    [1, 2, 3, 4, 5],
-    [1, 2, 3, 4, 5, 6],
-    [1, 2, 3, 4, 5, 6, 7],
-    [1, 2, 3, 4, 5, 6, 7, 8],
-    [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  ]
+  @observable page = 1
+
+  @observable list = []
 
   @observable listType = 'all' // 首页列表分类
 
   @action modifyList = () => {
     this.list = [ ...Array(100).keys()]
+  }
+
+  @action getList = async () => {
+    this.loadingList = true
+    const res = await getList(this.page)
+
+    console.log('res', res)
+
+    runInAction(() => {
+      this.list = [ ...this.list, ...res.data.data ]
+      this.page = res.data.page + 1
+      this.loadingList = false
+    })
   }
 
   @action setValue = (key, value) => {

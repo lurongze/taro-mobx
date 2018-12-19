@@ -16,7 +16,7 @@ export default class Gallery extends Taro.Component {
           {
             list.map((e) => {
               return (
-                <View className={className} key={e} style={{backgroundImage: `url(${image})`}} />
+                <View className={className} key={e} style={{backgroundImage: `url(${e})`}} />
               )
             })
           }
@@ -40,7 +40,7 @@ export default class Gallery extends Taro.Component {
             {
               list1.map((e) => {
                 return (
-                  <View className={className} key={e} style={{backgroundImage: `url(${image})`}} />
+                  <View className={className} key={e} style={{backgroundImage: `url(${e})`}} />
                 )
               })
             }
@@ -50,7 +50,7 @@ export default class Gallery extends Taro.Component {
               list2.map((e) => {
                 return (
                   <View className={className}  key={e}>
-                    <View className={className} key={e} style={{backgroundImage: `url(${image})`}} />
+                    <View className={className} key={e} style={{backgroundImage: `url(${e})`}} />
                   </View>
                 )
               })

@@ -11,9 +11,10 @@ let image = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec
 
 image = 'http://img4.tuwandata.com/v2/thumb/jpg/YjQzYywxNTgsMTU4LDksMywxLC0xLE5PTkUsLCw5MA==/u/res.tuwan.com/zipgoods/20181213/e09f10da72db9d79de1e8d5fe9a1dbcb.jpg'
 
-@withLogin()
+
 @inject('indexStore', 'commonStore')
 @observer
+@withLogin()
 class Index extends Taro.Component {
 
   config = {
@@ -28,6 +29,8 @@ class Index extends Taro.Component {
 
   componentDidMount () {
     console.log('index-componentDidMount')
+    const { indexStore } = this.props
+    indexStore.getList();
   }
 
   componentWillUnmount () { }
@@ -81,6 +84,11 @@ class Index extends Taro.Component {
     })
   }
 
+  onReachBottom = () => {
+    const { indexStore } = this.props
+    indexStore.getList();
+  }
+
   render () {
     const { indexStore: { list, listType, loadingList }, commonStore: { version } } = this.props
     return (
@@ -117,7 +125,7 @@ class Index extends Taro.Component {
           {
             list.map((item) => {
               return (
-                <View className='list-item' key={item.toString()} onClick={this.goDetail.bind(this, item)}>
+                <View className='list-item' key={item.id} onClick={this.goDetail.bind(this, item)}>
                   <View className='list-header'>
                     <View className='list-avatar' style={{backgroundImage: `url(${image})`}} />
                     <View className='list-title'>
@@ -127,9 +135,9 @@ class Index extends Taro.Component {
                     <View className='iconfont icon-gengduo' />
                   </View>
                   <View className='list-desc'>
-                    <Text className='item-cate'>#cosplay#</Text>这是我的第一套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！
+                    <Text className='item-cate'>#cosplay#</Text>{item.title}
                   </View>
-                  <Gallery list={item} />
+                  <Gallery list={[item.pic, item.pic, item.pic , item.pic, item.pic, item.pic]} />
                   <View className='list-footer'>
                     <View className='footer-action'>
                       <Text className='iconfont icon-gonggao' /> 分享
@@ -148,7 +156,7 @@ class Index extends Taro.Component {
         </View>
         {
           loadingList && (
-            <View>加载中...</View>
+            <View className='loading'>加载中...</View>
           )
         }
         <View onClick={this.goPublish.bind(this)} className='publishButton iconfont icon-pinglun' />
