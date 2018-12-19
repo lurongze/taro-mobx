@@ -97,10 +97,10 @@ const helper = {
         }
       } }
   },
-  getParams (url, data, params) {
+  getParams (url, data, params = {}) {
     return helper.requestParams(url, data, 'GET', params)
   },
-  postParams (url, data, params) {
+  postParams (url, data, params = {}) {
     return helper.requestParams(url, data, 'POST', params)
   },
 

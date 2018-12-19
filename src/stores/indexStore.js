@@ -4,6 +4,8 @@ configure({ enforceActions: 'always' })
 
 class indexStore {
 
+  @observable loadingList = false
+
   @observable list = [
     [1],
     [1, 2],
@@ -22,8 +24,8 @@ class indexStore {
     this.list = [ ...Array(100).keys()]
   }
 
-  @action setListType = (type) => {
-    this.listType = type
+  @action setValue = (key, value) => {
+    this[key] = value
   }
 
 }

@@ -7,7 +7,10 @@ import TabList from '../../components/tabList/index'
 import helper from '../../utils/helper'
 import './index.scss'
 
-const image = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg'
+let image = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg'
+
+image = 'http://img4.tuwandata.com/v2/thumb/jpg/YjQzYywxNTgsMTU4LDksMywxLC0xLE5PTkUsLCw5MA==/u/res.tuwan.com/zipgoods/20181213/e09f10da72db9d79de1e8d5fe9a1dbcb.jpg'
+
 @withLogin()
 @inject('indexStore', 'commonStore')
 @observer
@@ -39,7 +42,7 @@ class Index extends Taro.Component {
 
   switchTab = (index, detail) => {
     const { indexStore } = this.props
-    indexStore.setListType(detail.id);
+    indexStore.setValue('listType', detail.id);
   }
 
   navigateTo = (url) => {
@@ -79,7 +82,7 @@ class Index extends Taro.Component {
   }
 
   render () {
-    const { indexStore: { list, listType }, commonStore: { version } } = this.props
+    const { indexStore: { list, listType, loadingList }, commonStore: { version } } = this.props
     return (
       <View className='index'>
         <View className='header'>
@@ -143,6 +146,11 @@ class Index extends Taro.Component {
             })
           }
         </View>
+        {
+          loadingList && (
+            <View>加载中...</View>
+          )
+        }
         <View onClick={this.goPublish.bind(this)} className='publishButton iconfont icon-pinglun' />
       </View>
     )

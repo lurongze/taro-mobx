@@ -3,7 +3,7 @@ import '@tarojs/async-await'
 import { Provider } from '@tarojs/mobx'
 import Index from './pages/index'
 
-import stores from './store/index'
+import stores from './stores/index'
 
 import './app.scss'
 
@@ -12,8 +12,6 @@ import './app.scss'
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
-
-const store = stores
 
 class App extends Component {
 
@@ -66,7 +64,7 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Provider store={store}>
+      <Provider store={stores}>
         <Index />
       </Provider>
     )
