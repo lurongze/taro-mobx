@@ -1,54 +1,6 @@
 .header{
   display: block;
   width: 100%;
-  height: 350px;
-  background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg');
-  background-size: cover;
-  padding: 0 50px;
-  box-sizing: border-box;
-}
-
-.search {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100px;
-
-  & .logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 10px;
-    background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544285251208&di=d3b5a0d1c0f52e5733c88a1ea81efc89&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201407%2F03%2F20140703194024_5YWEL.jpeg');
-    background-size: cover;
-  }
-
-  & .input-bg {
-    display: flex;
-    width: 600px;
-    height: 70px;
-    line-height: 70px;
-    background: rgba(255, 255, 255, .7);
-    border-radius: 10px;
-    margin-left: 20px;
-    padding: 0 50px 0 10px;
-    box-sizing: border-box;
-  }
-
-  & .icon {
-    width: 20%;
-    height: 70px;
-    text-align: center;
-    line-height: 70px;
-    font-size: 40px;
-    color: #606266;
-  }
-
-
-  & .search-input {
-    width: 100%;
-    height: 100%;
-  }
 }
 
 .title-block {

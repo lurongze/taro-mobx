@@ -1,8 +1,8 @@
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { Text } from '@tarojs/components'
 import './ex-icon.scss'
 
-// 这个组件，写成icon的时候，编译总是报错，名字改掉就好了，暂时不知道是上面bug
+// 这个组件，写成icon的时候，编译总是报错，名字改掉就好了，暂时不知道是什么bug
 export default class ExIcon extends Taro.Component {
 
   render () {
@@ -13,16 +13,14 @@ export default class ExIcon extends Taro.Component {
       fontSize: fontSize
     }
     return (
-      <View className={className} style={style}>
-        {this.props.children}
-      </View>
+      <Text className={className} style={style} />
     )
   }
 }
 
 ExIcon.defaultProps = {
   color: '#000000',
-  fontSize: '20px',
+  fontSize: '20rpx',
   name: 'wechat'
 }
 

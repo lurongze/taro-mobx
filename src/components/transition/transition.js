@@ -4,40 +4,6 @@ import _isFunction from 'lodash/isFunction'
 import './transition.scss'
 
 export default class Transition extends Taro.Component {
-  constructor (props) {
-    super(...arguments)
-    const { isOpened, customClass, duration, animationName } = props
-    this.state = {
-      isOpened,
-      display: false,
-      animationName: animationName,
-      duration: duration,
-      classArray: [...['van-transition'], ...customClass]
-    }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const { isOpened } = nextProps
-
-    if (isOpened !== this.state.isOpened) {
-      if (isOpened) {
-        this.setState({
-          isOpened: isOpened,
-          display: true
-        })
-      } else {
-        this.setState({
-          isOpened
-        })
-      }
-    } else {
-      if (isOpened) {
-        this.setState({
-          display: true
-        })
-      }
-    }
-  }
 
   clickBlock () {
     if (_isFunction(this.props.onClickBlock)) {
@@ -45,29 +11,21 @@ export default class Transition extends Taro.Component {
     }
   }
 
-  animationEnd () {
-    if (!this.state.isOpened) {
-      this.setState({
-        display: false
-      })
-    }
-  }
-
   render () {
-    const { isOpened, duration, animationName } = this.state
-    let { display } = this.state
-    const { zIndex, customStyle } = this.props
+    // const { isOpened, duration, animationName } = this.state
+    const { zIndex, customStyle, isOpened, animationName, duration, customClass } = this.props
     let className = []
     let customAnimationName = 'van-' + animationName + '-enter'
+    let classArray = [...['van-transition'], ...customClass]
     if (isOpened) {
-      className = [...this.state.classArray,...['van-transition-active']]
+      className = [...classArray, ...['van-transition-active']]
     } else {
-      className = this.state.classArray
+      className = classArray
       customAnimationName = 'van-' + animationName + '-leave' // 'van-slide-down-leave'
     }
-    const style = Object.assign({animationName: customAnimationName, animationDuration: duration + 'ms', zIndex: zIndex, display: display? 'block': 'none'}, customStyle)
+    const style = Object.assign({animationName: customAnimationName, animationDuration: duration + 'ms', zIndex: zIndex, display: isOpened? 'flex': 'none'}, customStyle)
     return (
-      <View className={className} style={style} onClick={this.clickBlock.bind(this)} onAnimationEnd={this.animationEnd.bind(this)}>
+      <View className={className} style={style} onClick={this.clickBlock.bind(this)} >
         {this.props.children}
       </View>
     )

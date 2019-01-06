@@ -1,0 +1,41 @@
+.tab-list {
+  width: 100%;
+  background-color: #fff;
+}
+
+.list-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  & .list-item {
+    display: flex;
+    width: 48%;
+    background-color: #fff;
+    flex-direction: column;
+    margin-top: 20px;
+
+    & .image {
+      width: 100%;
+    }
+
+    & .sale-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 15px;
+      color: #909399;
+      font-size: 30px;
+      & .price {
+        text-decoration-line: line-through;
+      }
+    }
+
+    & .title {
+      font-size: 35px;
+      color: #606266;
+      padding: 10px 15px;
+    }
+
+  }
+}

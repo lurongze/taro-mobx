@@ -8,14 +8,7 @@ import './tbk-view.scss'
 
 export default class Popup extends Taro.Component {
 
-  componentWillReceiveProps (nextProps) {
-    const { isOpened } = nextProps
-    if (isOpened !== this.state.isOpened) {
-      this.setState({
-        isOpened
-      })
-    }
-  }
+
   close () {
     this.setState({
       isOpened: false

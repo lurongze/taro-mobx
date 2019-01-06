@@ -4,6 +4,7 @@ import { observer, inject } from '@tarojs/mobx'
 import withLogin from '../../hoc/withLogin'
 import Gallery from '../../components/gallery/gallery'
 import TabList from '../../components/tabList/index'
+import SwiperImg from '../../components/swiper-img/swiper-img'
 import helper from '../../utils/helper'
 import './index.scss'
 
@@ -90,27 +91,11 @@ class Index extends Taro.Component {
   }
 
   render () {
-    const { indexStore: { list, listType, loadingList }, commonStore: { version } } = this.props
+    const { indexStore: { list, loadingList }, commonStore: { version } } = this.props
     return (
       <View className='index'>
         <View className='header'>
-          <View className='search'>
-            <View className='logo' />
-            <View className='input-bg'>
-              <View className='icon iconfont icon-search' />
-              <Input className='search-input' value={listType} />
-            </View>
-          </View>
-          <View className='title-block'>
-            <View className='big-logo' />
-            <View className='site-info'>
-              <View className='site-info-header'>
-                <View className='item'><Text className='iconfont icon-Sign' />签到</View>
-                <View className='item'><Text  className='iconfont icon-iconfontzhizuobiaozhun49' />邀请</View>
-              </View>
-              <View className='text'>总浏览30.6万 用户数9384</View>
-            </View>
-          </View>
+          <SwiperImg imgData={[image,'http://img4.tuwandata.com/v2/thumb/jpg/MjdhNCw2MjQsMCw5LDMsMSwtMSxOT05FLCwsOTA=/u/res.tuwan.com/zipgoods/20190104/0519773769f6c6cf46ed691a6f82f595.jpg','http://img4.tuwandata.com/v2/thumb/jpg/NjgyNSw2MjQsMCw5LDMsMSwtMSxOT05FLCwsOTA=/u/res.tuwan.com/zipgoods/20190104/9829e27cc92c5cb6dea95406dc012d0d.jpg']} />
         </View>
         <View className='notice' onClick={this.navigateTo.bind(this, '/pages/publish/index')}>
           <Text className='iconfont icon-gonggao' />
@@ -156,7 +141,9 @@ class Index extends Taro.Component {
         </View>
         {
           loadingList && (
-            <View className='loading'>加载中...</View>
+            <View className='loading'>
+              <Text className='iconfont icon-loading' /> 加载中...
+            </View>
           )
         }
         <View onClick={this.goPublish.bind(this)} className='publishButton iconfont icon-pinglun' />
