@@ -91,7 +91,6 @@ const helper = {
         url: URL,
         data: data,
         header: {
-          'content-type': 'application/x-www-form-urlencoded',
           'authorization': helper.getSession(),
           'appid': helper.config('appId')
         }
