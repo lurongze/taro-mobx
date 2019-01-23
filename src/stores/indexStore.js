@@ -12,21 +12,25 @@ class indexStore {
 
   @observable list = []
 
-  @observable listType = 'all' // 首页列表分类
-
-  @action modifyList = () => {
-    this.list = [ ...Array(100).keys()]
-  }
+  @observable nomore = false
 
   @action getList = async () => {
+    if (this.nomore) {
+      return false
+    }
     this.loadingList = true
-    const res = await getList(this.page)
-
-    console.log('res', res)
-
+    const response = await getList(this.page)
+    const res = response.data
     runInAction(() => {
-      this.list = [ ...this.list, ...res.data.data ]
-      this.page = res.data.page + 1
+      if ( res.code === 200 ) {
+        if (res.data.list && res.data.list.length) {
+          this.list = [ ...this.list, ...res.data.list ]
+          this.page = res.data.nextPage
+          this.nomore = res.data.isLastPage
+        } else {
+          this.nomore = true
+        }
+      }
       this.loadingList = false
     })
   }

@@ -1,4 +1,5 @@
 import { observable, action, configure, runInAction } from 'mobx'
+import { getGalleryDetail } from '../service'
 
 configure({ enforceActions: 'always' })
 
@@ -6,11 +7,20 @@ class detailStore {
 
   @observable currentTab = 'comment'
 
-  @observable item = {}
+  @observable detailData = {}
+
+  @observable loading = false
 
 
-  @action.bound detailStore = () => {
-    this.item = {}
+  @action.bound getDetail = async (id) => {
+
+    const response = await getGalleryDetail(id);
+    const res = response.data
+
+    runInAction(() => {
+        this.detailData = res.data
+    })
+
   }
 
   @action.bound setCurrentTab = (value) => {

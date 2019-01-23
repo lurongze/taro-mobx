@@ -15,7 +15,10 @@ class Detail extends Taro.Component {
 
   componentWillReact () { }
 
-  componentDidMount () { }
+  componentDidMount () {
+    const { detailStore } = this.props;
+    detailStore.getDetail(this.$router.params.id)
+  }
 
   componentWillUnmount () { }
 
@@ -28,7 +31,7 @@ class Detail extends Taro.Component {
   }
 
   render () {
-    const { detailStore: { currentTab }, commonStore: { defaultAvatar } } = this.props
+    const { detailStore: { currentTab, detailData }, commonStore: { defaultAvatar } } = this.props
     const list = [...Array(20).keys()]
     return (
       <View className='index'>
@@ -36,7 +39,7 @@ class Detail extends Taro.Component {
           <View className='avatar' style={{backgroundImage: `url(${defaultAvatar})`}} />
           <View className='info'>
             <View className='name'>
-              柳岩<Text className='level'>lv1</Text>
+              {detailData.authorName}
             </View>
             <View className='info-bottom'>
               <View className='time'>2018/09/23 12:12</View>
@@ -100,9 +103,9 @@ class Detail extends Taro.Component {
 
         </View>
         <View className='action-list'>
-          <View className='action-item iconfont icon-dianzan' />
-          <View className='action-item iconfont icon-dianzan' />
-          <View className='action-item iconfont icon-Group-' />
+          <View className='action-item van-icon van-icon-goods-collect' />
+          <View className='action-item van-icon van-icon-share' />
+          <View className='action-item van-icon van-icon-like-o' />
           <View className='action-comment'>评论</View>
         </View>
       </View>

@@ -1,4 +1,4 @@
-@import './assets/css/font.scss';
+@import './assets/css/ex-icon.scss';
 
 .loading {
   display: flex;
@@ -9,7 +9,7 @@
   color: #909399;
   font-size: 30px;
 
-  & .iconfont {
+  & .van-icon {
     animation: t-rotate .8s linear infinite;
     margin-right: 10px;
   }
@@ -57,33 +57,8 @@ page{
   }
 }
 
-@font-face {
-  font-family: "iconfont";
-  src: url('./assets/font/iconfont.ttf') format('truetype')
+.van-icon {
+  font-size: 25px;
 }
-
-.iconfont {
-  font-family: 'iconfont' !important;
-  font-size:30px;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-pinglun:before { content: "\e64a"; }
-
-.icon-gonggao:before { content: "\e6c0"; }
-
-.icon-iconfontzhizuobiaozhun49:before { content: "\e630"; }
-
-.icon-gengduo:before { content: "\e69b"; }
-
-.icon-search:before { content: "\e61d"; }
-
-.icon-dianzan:before { content: "\e61a"; }
-
-.icon-Group-:before { content: "\e698"; }
-
-.icon-Sign:before { content: "\e614"; }
 
 

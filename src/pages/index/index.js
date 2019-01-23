@@ -3,7 +3,6 @@ import { View, Input, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 import withLogin from '../../hoc/withLogin'
 import Gallery from '../../components/gallery/gallery'
-import TabList from '../../components/tabList/index'
 import SwiperImg from '../../components/swiper-img/swiper-img'
 import helper from '../../utils/helper'
 import './index.scss'
@@ -24,10 +23,6 @@ class Index extends Taro.Component {
 
   componentWillMount () { }
 
-  componentWillReact () {
-    console.log('componentWillReact')
-  }
-
   componentDidMount () {
     console.log('index-componentDidMount')
     const { indexStore } = this.props
@@ -42,11 +37,6 @@ class Index extends Taro.Component {
 
   login = () => {
     helper.login()
-  }
-
-  switchTab = (index, detail) => {
-    const { indexStore } = this.props
-    indexStore.setValue('listType', detail.id);
   }
 
   navigateTo = (url) => {
@@ -75,7 +65,7 @@ class Index extends Taro.Component {
       item: item
     });
     return Taro.navigateTo({
-      url: '/pages/detail/index'
+      url: `/pages/detail/index?id=${item.id}`
     })
   }
 
@@ -98,12 +88,8 @@ class Index extends Taro.Component {
           <SwiperImg imgData={[image,'http://img4.tuwandata.com/v2/thumb/jpg/MjdhNCw2MjQsMCw5LDMsMSwtMSxOT05FLCwsOTA=/u/res.tuwan.com/zipgoods/20190104/0519773769f6c6cf46ed691a6f82f595.jpg','http://img4.tuwandata.com/v2/thumb/jpg/NjgyNSw2MjQsMCw5LDMsMSwtMSxOT05FLCwsOTA=/u/res.tuwan.com/zipgoods/20190104/9829e27cc92c5cb6dea95406dc012d0d.jpg']} />
         </View>
         <View className='notice' onClick={this.navigateTo.bind(this, '/pages/publish/index')}>
-          <Text className='iconfont icon-gonggao' />
+          <Text className='van-icon van-icon-volume' />
           <Text className='notice-title'>{version}公告：淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线淘宝优惠券商城新上线</Text>
-        </View>
-
-        <View className='tab-list'>
-          <TabList onSwitch={this.switchTab} list={[{ id: 'all', text: '全部' }, {id: 'hot', text: '最热'}, { id: 'text', text: '文字帖' }]} width='33.3333' />
         </View>
 
         <View className='list-block'>
@@ -112,26 +98,26 @@ class Index extends Taro.Component {
               return (
                 <View className='list-item' key={item.id} onClick={this.goDetail.bind(this, item)}>
                   <View className='list-header'>
-                    <View className='list-avatar' style={{backgroundImage: `url(${image})`}} />
+                    <View className='list-avatar' style={{backgroundImage: `url(${item.authorAvatar})`}} />
                     <View className='list-title'>
-                      <View className='list-user'>冯提莫<Text className='list-level'>lv5</Text></View>
-                      <View className='list-time'>2018/09/12 12:13</View>
+                      <View className='list-user'>{item.authorName}</View>
+                      <View className='list-time'>{helper.formatTime(item.publishTime)}</View>
                     </View>
-                    <View className='iconfont icon-gengduo' />
+                    <View className='van-icon van-icon-more-o' />
                   </View>
                   <View className='list-desc'>
-                    <Text className='item-cate'>#cosplay#</Text>{item.title}
+                    <Text className='item-cate'>#{item.category}#</Text>{item.title}
                   </View>
-                  <Gallery list={[item.pic, item.pic, item.pic , item.pic, item.pic, item.pic]} />
+                  <Gallery list={item.covers.split(',')} />
                   <View className='list-footer'>
                     <View className='footer-action'>
-                      <Text className='iconfont icon-gonggao' /> 分享
+                      <Text className='van-icon van-icon-share' /> 分享
                     </View>
                     <View className='footer-action' onClick={this.goComment.bind(this, item)}>
-                      <Text className='iconfont icon-pinglun' /> 评论
+                      <Text className='van-icon van-icon-edit' /> 评论
                     </View>
                     <View className='footer-action'>
-                      <Text className='iconfont icon-dianzan' /> 点赞
+                      <Text className='van-icon van-icon-like-o' /> 点赞
                     </View>
                   </View>
                 </View>
@@ -142,11 +128,20 @@ class Index extends Taro.Component {
         {
           loadingList && (
             <View className='loading'>
-              <Text className='iconfont icon-loading' /> 加载中...
+              加载中...
             </View>
           )
         }
-        <View onClick={this.goPublish.bind(this)} className='publishButton iconfont icon-pinglun' />
+
+        {
+          !loadingList && list.length > 0 && (
+            <View className='loading'>
+              -- 我是有底线的 --
+            </View>
+          )
+        }
+
+        <View onClick={this.goPublish.bind(this)} className='publishButton van-icon van-icon-add' />
       </View>
     )
   }
