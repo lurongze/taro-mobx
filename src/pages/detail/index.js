@@ -30,33 +30,49 @@ class Detail extends Taro.Component {
     this.props.detailStore.setCurrentTab(key)
   }
 
+  goComment = (item) => {
+    const { commonStore: store, detailStore: { detailData } } = this.props
+    store.commonStore.setPreGallery({
+      name: detailData.authorName || '',
+      desc: detailData.title || '',
+      avatar: detailData.authorAvatar || '',
+      author: detailData.author || 0
+    });
+    return Taro.navigateTo({
+      url: '/pages/comment/index'
+    })
+  }
+
+  doLike = () => {
+    const { commonStore: store, detailStore: { detailData } } = this.props
+    store.doLike(detailData)
+  }
+
   render () {
-    const { detailStore: { currentTab, detailData }, commonStore: { defaultAvatar } } = this.props
-    const list = [...Array(20).keys()]
+    const { detailStore: { currentTab, detailData } } = this.props
+    const list = detailData.covers.split(',')
     return (
       <View className='index'>
         <View className='header'>
-          <View className='avatar' style={{backgroundImage: `url(${defaultAvatar})`}} />
+          <View className='avatar' style={{backgroundImage: `url(${detailData.authorAvatar})`}} />
           <View className='info'>
             <View className='name'>
               {detailData.authorName}
             </View>
             <View className='info-bottom'>
               <View className='time'>2018/09/23 12:12</View>
-              <View className='view-count'>浏览量100</View>
+              <View className='view-count'>收藏{detailData.collectCount || 0}</View>
             </View>
           </View>
         </View>
         <View className='desc'>
-          这是我的第999套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！
+          {detailData.title}
         </View>
         <View className='picture-list'>
           {
-            list.filter((n) => {
-              return n < 4
-            }).map((n) => {
+            list.map((item, index) => {
               return (
-                <Image className='image-item' key={n} src={defaultAvatar} mode='widthFIx' />
+                <Image className='image-item' key={index} src={item} mode='widthFIx' />
               )
             })
           }
@@ -74,7 +90,7 @@ class Detail extends Taro.Component {
               }).map((n) => {
                 return (
                   <View className='comment-list-item' key={n}>
-                    <Image className='comment-avatar' src={defaultAvatar} />
+                    <Image className='comment-avatar' src={''} />
                     <View className='comment-block'>
                       <View className='comment-title'>
                         <View className='comment-name'>柳岩</View>
@@ -95,7 +111,7 @@ class Detail extends Taro.Component {
             {
               list.map((n) => {
                 return (
-                  <Image key={n} className='like-avatar' src={defaultAvatar} />
+                  <Image key={n} className='like-avatar' src={''} />
                 )
               })
             }
@@ -103,10 +119,9 @@ class Detail extends Taro.Component {
 
         </View>
         <View className='action-list'>
-          <View className='action-item van-icon van-icon-goods-collect' />
+          <View className='action-item van-icon van-icon-more' />
           <View className='action-item van-icon van-icon-share' />
-          <View className='action-item van-icon van-icon-like-o' />
-          <View className='action-comment'>评论</View>
+          <View onClick={this.goComment} className='action-comment'>评论</View>
         </View>
       </View>
     )

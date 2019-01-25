@@ -92,6 +92,10 @@
     width: 100%;
     padding: 15px 0;
 
+    & .van-icon {
+      font-size: 30px;
+    }
+
     & .list-avatar {
       width: 60px;
       height: 60px;
@@ -157,9 +161,20 @@
       align-items: center;
       font-size: 30px;
       color: #909399;
+      position: relative;
+
+      & .share-opacity {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        opacity: 0;
+      }
 
       & .van-icon {
         font-size: 30px;
+        margin-right: 15px;
       }
     }
 

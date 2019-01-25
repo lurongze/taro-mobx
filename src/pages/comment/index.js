@@ -28,7 +28,8 @@ class Comment extends Taro.Component {
     this.props.commentStore.setTextAreaValue(e.detail.value || '')
   }
 
-  submit = () => {
+  submit = async () => {
+    Taro.showLoading()
     const { commentStore } = this.props
     const tip = commentStore.checkParams();
     if (!helper.isEmpty(tip)) {
@@ -37,16 +38,33 @@ class Comment extends Taro.Component {
         icon: 'none'
       })
     }
-    const res = commentStore.submit();
-  }
+    const res = await commentStore.submit();
+    Taro.hideLoading()
+    if (res === 'ok') {
+      commentStore.setTextAreaValue('')
+      return Taro.showModal({
+        title: '提示',
+        content: '评论成功',
+        showCancel: false,
+        success: () => {
+          Taro.navigateBack()
+        }
+      })
 
+    } else {
+      return Taro.showToast({
+        title: res,
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  }
   cancel = () => {
     return Taro.navigateBack()
   }
-
   render () {
 
-    const { commonStore: { preUserInfo } } = this.props
+    const { commonStore: { preGallery } } = this.props
 
     return (
       <View className='index'>
@@ -55,13 +73,13 @@ class Comment extends Taro.Component {
         </View>
         <View className='comment-desc'>
           {
-            preUserInfo.avatar && (
-              <View className='avatar' style={{backgroundImage: `url(${preUserInfo.avatar})`}} />
+            preGallery.authorName && (
+              <View className='avatar' style={{backgroundImage: `url(${preGallery.authorAvatar})`}} />
             )
           }
           <View className='desc'>
-            <View className='name'>@{preUserInfo.name}</View>
-            <View className='info'>{preUserInfo.desc}</View>
+            <View className='name'>@{preGallery.authorName}</View>
+            <View className='info'>{preGallery.title}</View>
           </View>
         </View>
         <View className='action-list'>

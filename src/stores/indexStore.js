@@ -15,7 +15,7 @@ class indexStore {
   @observable nomore = false
 
   @action getList = async () => {
-    if (this.nomore) {
+    if (this.nomore || this.loadingList) {
       return false
     }
     this.loadingList = true

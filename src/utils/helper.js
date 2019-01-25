@@ -107,6 +107,9 @@ const helper = {
   postParams (url, data, params = {}) {
     return helper.requestParams(url, data, 'POST', params)
   },
+  putParams (url, data, params = {}) {
+    return helper.requestParams(url, data, 'PUT', params)
+  },
 
   setSession (value) {
     Taro.setStorageSync(sessionKey, value)
@@ -133,6 +136,9 @@ const helper = {
       format = format.replace(formateArr[i], returnArr[i])
     }
     return format
+  },
+  timeStamp() {
+    return parseInt((new Date()).getTime() / 1000);
   }
 }
 

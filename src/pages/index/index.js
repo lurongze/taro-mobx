@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { View, Input, Text } from '@tarojs/components'
+import { View, Button, Text, Block } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 import withLogin from '../../hoc/withLogin'
 import Gallery from '../../components/gallery/gallery'
@@ -46,26 +46,16 @@ class Index extends Taro.Component {
   }
 
   goComment = (item) => {
-    this.props.commonStore.setPreUserId({
-      name: '柳岩' + item,
-      desc: '这是我的第999套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！',
-      avatar: image,
-      item: item
-    });
+    this.props.commonStore.setPreGallery(item);
     return Taro.navigateTo({
       url: '/pages/comment/index'
     })
   }
 
-  goDetail = (item) => {
-    this.props.commonStore.setPreUserId({
-      name: '柳岩' + item,
-      desc: '这是我的第999套相片哦，希望大家喜欢。喜欢的请多点赞，或者关注我哦。我会不定时更新各种美图和大家一起分享的，也可关注我的淘宝店铺购买全套相册！',
-      avatar: image,
-      item: item
-    });
+  goDetail = (id, e) => {
+    console.log('id', id, e)
     return Taro.navigateTo({
-      url: `/pages/detail/index?id=${item.id}`
+      url: `/pages/detail/index?id=${id}`
     })
   }
 
@@ -75,9 +65,25 @@ class Index extends Taro.Component {
     })
   }
 
+  doLike = (item) => {
+    const { commonStore: store } = this.props
+    store.doLike(item)
+  }
+
+  showMore = (item) => {
+    const { commonStore: store } = this.props
+    Taro.showActionSheet({
+      itemList: ['收藏'],
+      success(res) {
+        console.log('res', res)
+        store.doCollect(item)
+      }
+    })
+  }
+
   onReachBottom = () => {
     const { indexStore } = this.props
-    indexStore.getList();
+    indexStore.getList()
   }
 
   render () {
@@ -96,27 +102,30 @@ class Index extends Taro.Component {
           {
             list.map((item) => {
               return (
-                <View className='list-item' key={item.id} onClick={this.goDetail.bind(this, item)}>
+                <View className='list-item' key={item.id}>
                   <View className='list-header'>
                     <View className='list-avatar' style={{backgroundImage: `url(${item.authorAvatar})`}} />
                     <View className='list-title'>
                       <View className='list-user'>{item.authorName}</View>
                       <View className='list-time'>{helper.formatTime(item.publishTime)}</View>
                     </View>
-                    <View className='van-icon van-icon-more-o' />
+                    <View className='van-icon van-icon-more' onClick={this.showMore.bind(this, item)} />
                   </View>
-                  <View className='list-desc'>
+                  <View className='list-desc' onClick={this.goDetail.bind(this, item.id)}>
                     <Text className='item-cate'>#{item.category}#</Text>{item.title}
                   </View>
-                  <Gallery list={item.covers.split(',')} />
+                  <Block onClick={this.goDetail.bind(this, item.id)}>
+                    <Gallery list={item.covers.split(',')}  />
+                  </Block>
                   <View className='list-footer'>
                     <View className='footer-action'>
                       <Text className='van-icon van-icon-share' /> 分享
+                      <Button openType='share' className='share-opacity' />
                     </View>
                     <View className='footer-action' onClick={this.goComment.bind(this, item)}>
                       <Text className='van-icon van-icon-edit' /> 评论
                     </View>
-                    <View className='footer-action'>
+                    <View className='footer-action' onClick={this.doLike.bind(this, item)}>
                       <Text className='van-icon van-icon-like-o' /> 点赞
                     </View>
                   </View>
