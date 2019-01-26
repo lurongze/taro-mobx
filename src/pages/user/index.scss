@@ -1,10 +1,11 @@
 .header {
   display: flex;
   width: 100%;
-  height: 110px;
+  height: 150px;
   justify-content: flex-start;
   align-items: center;
   background-color: #ffffff;
+  flex-direction: column;
 
   & .avatar {
     width: 80px;
@@ -30,7 +31,7 @@
 
 .block {
   margin-top: 30px;
-  padding: 0 15px;
+  padding: 0 25px;
   background-color: #ffffff;
   & .list {
     display: flex;
@@ -56,6 +57,8 @@
     }
     & .title {
       flex: 10;
+      box-sizing: border-box;
+      padding: 0 25px;
     }
   }
 

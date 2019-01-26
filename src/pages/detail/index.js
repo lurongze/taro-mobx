@@ -50,6 +50,7 @@ class Detail extends Taro.Component {
 
   render () {
     const { detailStore: { currentTab, detailData } } = this.props
+    console.log('detailData', detailData)
     const list = detailData.covers.split(',')
     return (
       <View className='index'>

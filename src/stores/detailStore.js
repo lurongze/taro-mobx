@@ -7,7 +7,9 @@ class detailStore {
 
   @observable currentTab = 'comment'
 
-  @observable detailData = {}
+  @observable detailData = {
+    covers: ''
+  }
 
   @observable loading = false
 

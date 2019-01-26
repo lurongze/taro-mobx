@@ -37,18 +37,21 @@ class user extends Taro.Component {
       <View className='index'>
         <View className='header'>
           <Image className='avatar' src={defaultAvatar} />
-          <View className='name'>柳岩<Text className='level'>lv5</Text></View>
+          <View className='name'>柳岩</View>
         </View>
 
         <View className='block'>
           {
-            [1,2,3,4,5].map((n) => {
+            [
+              { title: '我的点赞', icon: 'van-icon-card', path: ''},
+              { title: '我的收藏', icon: 'van-icon-card', path: ''}
+            ].map((item) => {
               return (
-                <View onClick={this.viewUserScore.bind(this, '/pages/user-score/index')} className='list' key={n}>
-                  <View className='icon iconfont icon-Sign' />
-                  <View className='title'>我的点赞</View>
-                  <View className='count'>7</View>
-                  <View className='icon iconfont icon-gonggao' />
+                <View onClick={this.viewUserScore.bind(this, '/pages/user-score/index')} className='list' key={item.title}>
+                  <View className='van-icon van-icon-card' />
+                  <View className='title'>{item.title}</View>
+                  {/*<View className='count'>7</View>*/}
+                  <View className='van-icon van-icon-arrow' />
                 </View>
               )
             })

@@ -114,9 +114,9 @@ class Index extends Taro.Component {
                   <View className='list-desc' onClick={this.goDetail.bind(this, item.id)}>
                     <Text className='item-cate'>#{item.category}#</Text>{item.title}
                   </View>
-                  <Block onClick={this.goDetail.bind(this, item.id)}>
+                  <View onClick={this.goDetail.bind(this, item.id)}>
                     <Gallery list={item.covers.split(',')}  />
-                  </Block>
+                  </View>
                   <View className='list-footer'>
                     <View className='footer-action'>
                       <Text className='van-icon van-icon-share' /> 分享

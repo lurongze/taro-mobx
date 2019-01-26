@@ -40,12 +40,12 @@ export default class SwiperImg extends Taro.Component {
         {
           imgData && imgData.map((item) => {
             return (
-              <SwiperItem>
+              <SwiperItem key={item}>
                 <Image
                   // onLoad={this.swiperLoad}
                   // style={{height: `${swiperHeight}px`, width: '100%'}}
                   src={item}
-                  mode='widthFix'
+                  mode='aspectFill'
                 />
               </SwiperItem>
             )

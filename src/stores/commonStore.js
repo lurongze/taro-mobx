@@ -40,8 +40,10 @@ class commonStore {
   }
 
   @action doLike = async (item) => {
+    Taro.showLoading()
     const response = await doLike(this.loginUser.id, item.title, item.id)
     const res = response.data
+    Taro.hideLoading()
     if (res.code === 200) {
       return Taro.showToast({
         title: '点赞成功',
@@ -56,8 +58,10 @@ class commonStore {
   }
 
   @action doCollect = async (item) => {
+    Taro.showLoading()
     const response = await doCollect(this.loginUser.id, item.title, item.id)
     const res = response.data
+    Taro.hideLoading()
     if (res.code === 200) {
       return Taro.showToast({
         title: '收藏成功',
