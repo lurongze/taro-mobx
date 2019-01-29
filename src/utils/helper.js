@@ -44,12 +44,10 @@ const helper = {
 
   async login () {
     if (process.env.TARO_ENV === 'weapp') {
-
       if (reLoginTime > 10) {
         // 登录最多尝试10次吧
         return false;
       }
-
       try {
         await Taro.checkSession() // 登录态有效
         helper.log('登录态有效')
@@ -110,7 +108,9 @@ const helper = {
   putParams (url, data, params = {}) {
     return helper.requestParams(url, data, 'PUT', params)
   },
-
+  deleteParams (url, data, params = {}) {
+    return helper.requestParams(url, data, 'DELETE', params)
+  },
   setSession (value) {
     Taro.setStorageSync(sessionKey, value)
   },

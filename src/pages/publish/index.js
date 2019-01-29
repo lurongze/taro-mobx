@@ -1,10 +1,8 @@
 import Taro from '@tarojs/taro'
-import { View, Textarea } from '@tarojs/components'
+import { View, Textarea, Image } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 import helper from '../../utils/helper'
 import './index.scss'
-
-const image = 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1225985591,1368945382&fm=27&gp=0.jpg'
 
 @inject('publishStore')
 @observer
@@ -14,11 +12,18 @@ class publish extends Taro.Component {
     navigationBarTitleText: '发布'
   }
 
+  state = {
+
+  }
+
   componentWillMount () { }
 
   componentWillReact () { }
 
-  componentDidMount () { }
+  componentDidMount () {
+    const { publishStore: { getInitGallery } } = this.props
+    getInitGallery()
+  }
 
   componentWillUnmount () { }
 
@@ -31,7 +36,18 @@ class publish extends Taro.Component {
   }
 
   addPicture = () => {
-    this.props.publishStore.addPicture(image)
+    // this.props.publishStore.addPicture(image)
+    const { publishStore: { pictureList, addPicture } } = this.props
+    const count = 9 - pictureList.length
+    Taro.chooseImage({
+      count: count,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        const tempFilePaths = res.tempFilePaths
+        addPicture(tempFilePaths)
+      }
+    })
   }
 
   removePicture = (item) => {
@@ -58,6 +74,14 @@ class publish extends Taro.Component {
     return Taro.navigateBack()
   }
 
+  showImages = (item) => {
+    const { publishStore: { pictureList } } = this.props
+    Taro.previewImage({
+      urls: pictureList,
+      current: item
+    })
+  }
+
   render () {
     const { publishStore: { categories, category, pictureList } } = this.props
 
@@ -70,7 +94,8 @@ class publish extends Taro.Component {
           {
             pictureList.map((item, index) => {
               return (
-                <View key={item + index} className='picture-item' style={{backgroundImage:`url(${item})`}}>
+                <View key={item + index} className='picture-item' >
+                  <Image src={item} className='picture-img' mode='aspectFill' onClick={this.showImages.bind(this, item)} />
                   <View onClick={this.removePicture.bind(this, item)} className='remove'>×</View>
                 </View>
               )

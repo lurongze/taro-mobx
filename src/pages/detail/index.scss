@@ -27,8 +27,8 @@ page{
     flex: 1;
 
     & .level {
-      color: #20A0FF;
-      border: 1px solid #20A0FF;
+      color: #FF0099;
+      border: 1px solid #FF0099;
       border-radius: 4px;
       padding: 0 10px;
       font-size: 20px;
@@ -84,6 +84,16 @@ page{
     font-size: 40px;
     text-align: center;
     margin: 0 15px;
+    position: relative;
+
+    & .share-opacity {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
   }
 
   & .action-comment {
@@ -115,7 +125,7 @@ page{
       color: #606266;
       border-bottom: 8px solid #ffffff;
       &.active {
-        border-bottom: 8px solid #20A0FF;
+        border-bottom: 8px solid #FF0099;
       }
     }
   }
@@ -183,7 +193,7 @@ page{
           line-height: 1.2rem;
           margin-top: 15px;
           & .comment-to {
-            color: #20A0FF;
+            color: #FF0099;
           }
         }
       }

@@ -1,14 +1,22 @@
 import Taro from '@tarojs/taro'
-import { View, Text, Image } from '@tarojs/components'
+import {View, Text, Image, Button} from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 import './index.scss'
+import helper from "../../utils/helper";
 
-@inject('detailStore', 'commonStore')
+@inject('detailStore', 'commonStore', 'commentStore')
 @observer
 class Detail extends Taro.Component {
 
   config = {
     navigationBarTitleText: '详情'
+  }
+
+  state = {
+    page: 1,
+    commentList: [],
+    isLastPage: false,
+    loading: false
   }
 
   componentWillMount () { }
@@ -26,18 +34,16 @@ class Detail extends Taro.Component {
 
   componentDidHide () { }
 
+  onReachBottom () {
+    this.getComment()
+  }
   changeTab = (key) => {
     this.props.detailStore.setCurrentTab(key)
   }
 
-  goComment = (item) => {
+  goComment = () => {
     const { commonStore: store, detailStore: { detailData } } = this.props
-    store.commonStore.setPreGallery({
-      name: detailData.authorName || '',
-      desc: detailData.title || '',
-      avatar: detailData.authorAvatar || '',
-      author: detailData.author || 0
-    });
+    store.setPreGallery(detailData);
     return Taro.navigateTo({
       url: '/pages/comment/index'
     })
@@ -48,10 +54,50 @@ class Detail extends Taro.Component {
     store.doLike(detailData)
   }
 
+  moreAction = () => {
+    Taro.showActionSheet({
+      itemList: ['收藏', '点赞'],
+      success(res) {
+        console.log('res', res)
+        Taro.showToast({
+          title: '功能开发中...',
+          icon: 'none'
+        })
+      }
+    })
+  }
+
+  getComment = async () => {
+    const { commentList, loading, isLastPage, page } = this.state
+    const { commentStore: store, detailStore: { detailData } } = this.props
+    if (loading || isLastPage) {
+      return false
+    }
+    this.setState({
+      loading: true
+    })
+    const res = await store.getList(detailData.id, page)
+    if (res.code === 200 && res.data.list) {
+      this.setState({
+        commentList: [...commentList, ...res.data.list],
+        loading: false,
+        page:res.data.nextPage,
+        isLastPage: res.data.isLastPage
+      })
+    } else {
+      this.setState({
+        loading: false
+      })
+    }
+
+  }
+
   render () {
     const { detailStore: { currentTab, detailData } } = this.props
-    console.log('detailData', detailData)
     const list = detailData.covers.split(',')
+
+    const { commentList, loading, isLastPage } = this.state
+
     return (
       <View className='index'>
         <View className='header'>
@@ -61,8 +107,8 @@ class Detail extends Taro.Component {
               {detailData.authorName}
             </View>
             <View className='info-bottom'>
-              <View className='time'>2018/09/23 12:12</View>
-              <View className='view-count'>收藏{detailData.collectCount || 0}</View>
+              <View className='time'>{helper.formatTime(detailData.publishTime, 'Y-M-D h:m')}</View>
+              {/*<View className='view-count'>收藏{detailData.collectCount || 0}</View>*/}
             </View>
           </View>
         </View>
@@ -73,38 +119,58 @@ class Detail extends Taro.Component {
           {
             list.map((item, index) => {
               return (
-                <Image className='image-item' key={index} src={item} mode='widthFIx' />
+                <Image className='image-item' key={index} src={item} mode='widthFix' />
               )
             })
           }
         </View>
         <View className='custom-block'>
           <View className='tab-list'>
-            <View onClick={this.changeTab.bind(this, 'comment')} className={`tab-item ${currentTab === 'comment' ? 'active' : ''}`}>评论100</View>
-            <View onClick={this.changeTab.bind(this, 'like')} className={`tab-item ${currentTab === 'like' ? 'active' : ''}`}>点赞99</View>
+            <View onClick={this.changeTab.bind(this, 'comment')} className={`tab-item ${currentTab === 'comment' ? 'active' : ''}`}>评论</View>
+            <View onClick={this.changeTab.bind(this, 'like')} style={{display: 'none'}} className={`tab-item ${currentTab === 'like' ? 'active' : ''}`}>点赞</View>
           </View>
 
           <View className={`comment-list ${currentTab === 'comment' ? 'active' : ''}`}>
             {
-              list.filter((n) => {
-                return n < 4
-              }).map((n) => {
+              commentList.map((item) => {
                 return (
-                  <View className='comment-list-item' key={n}>
-                    <Image className='comment-avatar' src={''} />
+                  <View className='comment-list-item' key={item.id}>
+                    <Image className='comment-avatar' src={item.authorAvatar} />
                     <View className='comment-block'>
                       <View className='comment-title'>
-                        <View className='comment-name'>柳岩</View>
+                        <View className='comment-name'>{item.authorName}</View>
                       </View>
                       <View className='comment-content'>
-                        <Text className='comment-to'>@冯提莫</Text>
-                        这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay这一套图片非常好看呀，好喜欢，希望以后还有更多这样的高质量cosplay
+                        {/*<Text className='comment-to'>@冯提莫</Text>*/}
+                        {item.content}
                       </View>
-                      <View className='comment-time'>2018/09/12</View>
+                      <View className='comment-time'>{helper.formatTime(item.createTime, 'Y-M-D h:m')}</View>
                     </View>
                   </View>
                 )
               })
+            }
+            {
+              loading && (
+                <View className='loading'>
+                  加载中...
+                </View>
+              )
+            }
+
+            {
+              !loading && list.length > 0 && (
+                <View className='loading'>
+                  -- 我是有底线的 --
+                </View>
+              )
+            }
+            {
+              !loading && list.length < 1 && (
+                <View className='loading'>
+                  -- 还没有人评论哦 --
+                </View>
+              )
             }
           </View>
 
@@ -120,8 +186,10 @@ class Detail extends Taro.Component {
 
         </View>
         <View className='action-list'>
-          <View className='action-item van-icon van-icon-more' />
-          <View className='action-item van-icon van-icon-share' />
+          <View className='action-item van-icon van-icon-more' onClick={this.moreAction} />
+          <View className='action-item van-icon van-icon-share'>
+            <Button openType='share' className='share-opacity' />
+          </View>
           <View onClick={this.goComment} className='action-comment'>评论</View>
         </View>
       </View>

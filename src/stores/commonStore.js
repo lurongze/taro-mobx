@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { observable, action, configure, runInAction } from 'mobx'
-import { doLike, doCollect } from '../service/index'
+import {doLike, doCollect, weLogin, getMyLike, getMyComment, deleteLike, deleteCollect } from '../service/index'
 
 configure({ enforceActions: 'always' })
 
@@ -34,6 +34,23 @@ class commonStore {
 
   @action login = async () => {
     const login = await Taro.login()
+    try {
+      await Taro.checkSession() // 登录态有效
+    } catch (err) { // 登录态过期了，这里要进行微信登录
+      console.info('登录态失效了，要重新登录')
+      try {
+        const loginData = await Taro.login()
+        const response = await weLogin(loginData.code)
+        const res = response.data
+        if (res.code === 200 ) {
+
+        }
+        console.log('loginData', res)
+      } catch (err1) {
+        console.error('微信登录失败')
+      }
+    }
+
     runInAction(() => {
       this.preUserInfo = login
     })
@@ -57,6 +74,44 @@ class commonStore {
     }
   }
 
+  @action.bound deleteLike = async (id) => {
+    Taro.showLoading()
+    const response = await deleteLike(id)
+    const res = response.data
+    Taro.hideLoading()
+    if (res.code === 200) {
+      return Taro.showToast({
+        title: '删除成功',
+        icon: 'none'
+      })
+    } else {
+      return Taro.showToast({
+        title: res.message || '删除失败',
+        icon: 'none'
+      })
+    }
+  }
+
+  @action.bound deleteCollect = async (id) => {
+    Taro.showLoading()
+    const response = await deleteCollect(id)
+    const res = response.data
+    Taro.hideLoading()
+    if (res.code === 200) {
+      Taro.showToast({
+        title: '删除成功',
+        icon: 'none'
+      })
+      return true
+    } else {
+      Taro.showToast({
+        title: res.message || '删除失败',
+        icon: 'none'
+      })
+      return false
+    }
+  }
+
   @action doCollect = async (item) => {
     Taro.showLoading()
     const response = await doCollect(this.loginUser.id, item.title, item.id)
@@ -73,6 +128,16 @@ class commonStore {
         icon: 'none'
       })
     }
+  }
+
+  @action.bound getMyLikeList = async (memberId, page) => {
+    const response = await getMyLike(memberId, page)
+    return response.data
+  }
+
+  @action.bound getMCollectList = async (memberId, page) => {
+    const response = await getMyComment(memberId, page)
+    return response.data
   }
 
 }

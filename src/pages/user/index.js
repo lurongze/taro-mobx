@@ -43,11 +43,12 @@ class user extends Taro.Component {
         <View className='block'>
           {
             [
-              { title: '我的点赞', icon: 'van-icon-card', path: ''},
-              { title: '我的收藏', icon: 'van-icon-card', path: ''}
+              { title: '我的点赞', icon: 'van-icon-card', path: '/pages/user/like-list'},
+              { title: '我的收藏', icon: 'van-icon-card', path: '/pages/user/collect-list'},
+              // { title: '我的积分', icon: 'van-icon-card', path: '/pages/user-score/index'}
             ].map((item) => {
               return (
-                <View onClick={this.viewUserScore.bind(this, '/pages/user-score/index')} className='list' key={item.title}>
+                <View onClick={this.viewUserScore.bind(this, item.path || '/pages/user-score/index')} className='list' key={item.title}>
                   <View className='van-icon van-icon-card' />
                   <View className='title'>{item.title}</View>
                   {/*<View className='count'>7</View>*/}

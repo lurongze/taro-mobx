@@ -1,5 +1,8 @@
-import { observable, action, configure, /*runInAction*/ } from 'mobx'
+import Taro from '@tarojs/taro'
+import { observable, action, configure, runInAction } from 'mobx'
 import helper from '../utils/helper'
+import { getInitGallery, updateGallery, uploadFile } from '../service/index'
+import commonStore from './commonStore'
 
 configure({ enforceActions: 'always' })
 
@@ -7,15 +10,10 @@ class publishStore {
 
   @observable categories = [
     { id: 1, name: 'COS图片' },
-    { id: 2, name: '二次元美图' },
-    { id: 3, name: '杂谈帖子' },
-    { id: 4, name: 'COS图片' },
-    { id: 5, name: '二次元美图' },
-    { id: 6, name: '杂谈帖子' },
-    { id: 7, name: 'COS图片' },
-    { id: 8, name: '二次元美图' },
-    { id: 9, name: '杂谈帖子' }
+    { id: 2, name: '二次元美图' }
   ]
+
+  @observable galleryData = {}
 
   @observable pictureList = []
 
@@ -32,7 +30,11 @@ class publishStore {
   }
 
   @action.bound addPicture = (picture) => {
-    this.pictureList = [...this.pictureList, picture]
+    if (Array.isArray(picture)) {
+      this.pictureList = [...this.pictureList, ...picture]
+    } else {
+      this.pictureList = [...this.pictureList, picture]
+    }
   }
 
   @action.bound removePicture = (picture) => {
@@ -50,8 +52,43 @@ class publishStore {
     }
   }
 
-  @action.bound submit = () => {
-    console.log('textAreaValue', this.textAreaValue, this.category, this.pictureList)
+  @action.bound getInitGallery = async () => {
+    const response = await getInitGallery()
+    const res = response.data
+    runInAction(()=>{
+      res.data.author = commonStore.loginUser.id
+      this.galleryData = res.data
+    })
+  }
+
+
+  @action.bound submit = async () => {
+    Taro.showLoading()
+    let galleryData = {...{}, ...this.galleryData}
+    galleryData.author = commonStore.loginUser.id
+    galleryData.title = this.textAreaValue
+    galleryData.covers = this.pictureList.join(',')
+    galleryData.category = this.category
+    const pictureList = this.pictureList
+    let cover = []
+    for(let i=0;i<pictureList.length; i++ ) {
+      const res = await uploadFile(pictureList[i], galleryData.id, galleryData.author)
+      if (res && res.length > 0) {
+        cover.push(res)
+      }
+    }
+    galleryData.covers = cover.join(',')
+
+    await updateGallery(galleryData)
+    Taro.hideLoading()
+    Taro.showModal({
+      title: '提示',
+      content: '上传成功',
+      showCancel: false,
+      success() {
+        Taro.navigateBack()
+      }
+    })
   }
 
 }

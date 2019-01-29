@@ -1,7 +1,7 @@
 import { observable, action, configure } from 'mobx'
 import helper from '../utils/helper'
 import commonStore from './commonStore'
-import { comment } from '../service/index'
+import { comment, getGalleryCommentList } from '../service/index'
 
 configure({ enforceActions: 'always' })
 
@@ -34,6 +34,12 @@ class commentStore {
       return res.message
     }
   }
+
+  @action.bound getList = async (galleryId, page) => {
+    const response = await getGalleryCommentList(galleryId, page)
+    return response.data
+  }
+
 }
 
 export default new commentStore()
