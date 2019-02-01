@@ -2,8 +2,6 @@ import Taro from '@tarojs/taro'
 import { Image, View } from '@tarojs/components'
 import './gallery.scss'
 
-let image = 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1225985591,1368945382&fm=27&gp=0.jpg'
-image = 'http://img4.tuwandata.com/v2/thumb/jpg/YjQzYywxNTgsMTU4LDksMywxLC0xLE5PTkUsLCw5MA==/u/res.tuwan.com/zipgoods/20181213/e09f10da72db9d79de1e8d5fe9a1dbcb.jpg'
 export default class Gallery extends Taro.Component {
 
   render () {
