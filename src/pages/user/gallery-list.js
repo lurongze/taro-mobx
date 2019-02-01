@@ -10,7 +10,7 @@ import './index.scss'
 class user extends Taro.Component {
 
   config = {
-    navigationBarTitleText: '我的点赞'
+    navigationBarTitleText: '我的相册'
   }
 
   state = {
@@ -54,7 +54,7 @@ class user extends Taro.Component {
 
     const loginUser = store.loginUser
 
-    const res = await store.getMCollectList(loginUser.id, page)
+    const res = await store.getMyGallery(loginUser.id, page)
 
     if (res.code === 200 && res.data.list) {
       this.setState({
@@ -68,16 +68,16 @@ class user extends Taro.Component {
         loading: false
       })
     }
-
   }
 
   deleteAction = (id) => {
     const { commonStore: store } = this.props
+    const loginUser = store.loginUser
     const { list } = this.state
     Taro.showActionSheet({
       itemList: ['删除'],
       success: async () => {
-        await store.deleteCollect(id)
+        await store.deleteGallery(id, loginUser.id)
         this.setState({
           list: list.filter((item)=>{ return item.id !== id })
         })
@@ -95,9 +95,9 @@ class user extends Taro.Component {
           {
             list.map((item) => {
               return (
-                <View className='list' key={item.title}>
+                <View  className='list' key={item.id}>
                   <View className='van-icon van-icon-delete' onClick={this.deleteAction.bind(this, item.id)} />
-                  <View className='title' onClick={this.viewUserScore.bind(this, `/pages/detail/index?id=${item.detailId}`)}>{item.detailTitle}</View>
+                  <View className='title' onClick={this.viewUserScore.bind(this, `/pages/detail/index?id=${item.id}`)}>{item.title}</View>
                   {/*<View className='count'>7</View>*/}
                   <View className='van-icon van-icon-arrow' />
                 </View>
@@ -123,7 +123,7 @@ class user extends Taro.Component {
         {
           !loading && list.length < 1 && (
             <View className='loading'>
-              -- 还没有收藏数据哦 --
+              -- 还没有相册数据哦 --
             </View>
           )
         }

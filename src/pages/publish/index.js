@@ -1,11 +1,13 @@
 import Taro from '@tarojs/taro'
-import { View, Textarea, Image } from '@tarojs/components'
+import { View, Textarea, Image, Button } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 import helper from '../../utils/helper'
+import withLogin from '../../hoc/withLogin'
 import './index.scss'
 
-@inject('publishStore')
+@inject('publishStore', 'commonStore')
 @observer
+@withLogin()
 class publish extends Taro.Component {
 
   config = {
@@ -82,8 +84,16 @@ class publish extends Taro.Component {
     })
   }
 
+  getUserInfo = (data) => {
+    console.log('getUserInfo', data)
+    const { commonStore: { updateUserInfo } } = this.props
+    const userInfo = data.detail.userInfo || {}
+    updateUserInfo(userInfo);
+    this.submit();
+  }
+
   render () {
-    const { publishStore: { categories, category, pictureList } } = this.props
+    const { publishStore: { categories, category, pictureList }, commonStore: { loginUser } } = this.props
 
     return (
       <View className='index'>
@@ -117,7 +127,22 @@ class publish extends Taro.Component {
           }
         </View>
         <View className='action-list'>
-          <View onClick={this.submit.bind(this)} className='action-submit action-button'>提    交</View>
+          {
+            loginUser.realNickname.length < 1 && (
+              <View className='action-submit action-button'>
+                提    交
+                <Button className='user-info' openType='getUserInfo' onGetUserInfo={this.getUserInfo} />
+              </View>
+            )
+          }
+          {
+            loginUser.realNickname.length > 0 && (
+              <View onClick={this.submit.bind(this)} className='action-submit action-button'>
+                提    交
+              </View>
+            )
+          }
+
           <View onClick={this.cancel.bind(this)} className='action-cancel action-button'>取    消</View>
         </View>
       </View>

@@ -8,7 +8,7 @@ import helper from '../utils/helper'
  */
 export async function getList(page) {
   // https://api.tuwan.com/apps/Welfare/getMenuList?from=pc&format=jsonp&page=1&callback=jQuery112307883539775249591_1545229011951&_=1545229011952
-  return Taro.request(helper.getParams(`/gallery/new/${page}/4`))
+  return Taro.request(helper.getParams(`/gallery/new/${page}/15`))
 }
 
 /**
@@ -82,19 +82,27 @@ export async function doCollect(author, detailTitle, detailId) {
 }
 
 export async function getGalleryCommentList(galleryId, page) {
-  return Taro.request(helper.getParams(`/comment/${galleryId}/${page}/1`))
+  return Taro.request(helper.getParams(`/comment/${galleryId}/${page}/20`))
 }
 
 export async function getMyLike(memberId, page) {
-  return Taro.request(helper.getParams(`/likeItem/${memberId}/${page}/20`))
+  return Taro.request(helper.getParams(`/likeItem/${memberId}/${page}/30`))
 }
 
 export async function getMyComment(memberId, page) {
-  return Taro.request(helper.getParams(`/collectItem/${memberId}/${page}/20`))
+  return Taro.request(helper.getParams(`/collectItem/${memberId}/${page}/30`))
+}
+
+export async function getMyGallery(memberId, page) {
+  return Taro.request(helper.getParams(`/member/gallery-list/${memberId}/${page}/30`))
 }
 
 export async function deleteLike(id) {
   return Taro.request(helper.deleteParams(`/likeItem/${id}`))
+}
+
+export async function deleteGallery(id, memberId) {
+  return Taro.request(helper.deleteParams(`/gallery/${memberId}/${id}`))
 }
 
 export async function deleteCollect(id) {
@@ -122,12 +130,25 @@ export async function uploadFile(localPath,galleryId, author) {
   } else {
     return ''
   }
+}
 
+export async function getLikeMostGallery() {
+  return Taro.request(helper.getParams(`/index/like-most/6`))
 }
 
 export async function weLogin(code) {
   return Taro.request(helper.getParams(`/member/weapp-login/${helper.config('appId')}/${code}`))
 }
+
+export async function updateUserInfo(id, avatar, nickname) {
+  const member = {
+    id,
+    avatar,
+    nickname
+  }
+  return Taro.request(helper.postParams(`/member`, member))
+}
+
 
 /**
  * 获取基础数据

@@ -1,10 +1,12 @@
 import Taro from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
+import withLogin from '../../hoc/withLogin'
 import './index.scss'
 
 @inject('userStore', 'commonStore')
 @observer
+@withLogin()
 class user extends Taro.Component {
 
   config = {
@@ -30,14 +32,13 @@ class user extends Taro.Component {
   }
 
   render () {
-
-    const { commonStore: { defaultAvatar } } = this.props
+    const { commonStore: { defaultAvatar, loginUser } } = this.props
 
     return (
       <View className='index'>
         <View className='header'>
-          <Image className='avatar' src={defaultAvatar} />
-          <View className='name'>柳岩</View>
+          <Image className='avatar' src={loginUser.avatar} />
+          <View className='name'>{loginUser.nickname}</View>
         </View>
 
         <View className='block'>
@@ -45,6 +46,7 @@ class user extends Taro.Component {
             [
               { title: '我的点赞', icon: 'van-icon-card', path: '/pages/user/like-list'},
               { title: '我的收藏', icon: 'van-icon-card', path: '/pages/user/collect-list'},
+              // { title: '我的相册', icon: 'van-icon-card', path: '/pages/user/gallery-list'},
               // { title: '我的积分', icon: 'van-icon-card', path: '/pages/user-score/index'}
             ].map((item) => {
               return (

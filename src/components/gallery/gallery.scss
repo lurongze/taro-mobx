@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-content: space-between;
   margin-top: 20px;
-  
+
   & .gallery3-big {
     width: 66%;
     & .w3 {
@@ -60,6 +60,7 @@
     overflow: hidden;
     height: 0;
     background-size: cover;
+    background-position: center;
 
     &.w1 {
       width: 100%;

@@ -1,11 +1,13 @@
 import Taro from '@tarojs/taro'
 import {View, Text, Image, Button} from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
+import withLogin from '../../hoc/withLogin'
 import './index.scss'
 import helper from "../../utils/helper";
 
 @inject('detailStore', 'commonStore', 'commentStore')
 @observer
+@withLogin()
 class Detail extends Taro.Component {
 
   config = {
@@ -26,6 +28,7 @@ class Detail extends Taro.Component {
   componentDidMount () {
     const { detailStore } = this.props;
     detailStore.getDetail(this.$router.params.id)
+    this.getComment()
   }
 
   componentWillUnmount () { }
@@ -76,7 +79,7 @@ class Detail extends Taro.Component {
     this.setState({
       loading: true
     })
-    const res = await store.getList(detailData.id, page)
+    const res = await store.getList(this.$router.params.id, page)
     if (res.code === 200 && res.data.list) {
       this.setState({
         commentList: [...commentList, ...res.data.list],
@@ -93,18 +96,18 @@ class Detail extends Taro.Component {
   }
 
   render () {
-    const { detailStore: { currentTab, detailData } } = this.props
-    const list = detailData.covers.split(',')
+    const { detailStore: { currentTab, detailData }, commonStore: { defaultAvatar } } = this.props
+    const list = detailData.covers ? detailData.covers.split(',') : []
 
     const { commentList, loading, isLastPage } = this.state
 
     return (
       <View className='index'>
         <View className='header'>
-          <View className='avatar' style={{backgroundImage: `url(${detailData.authorAvatar})`}} />
+          <View className='avatar' style={{backgroundImage: `url(${detailData.authorAvatar || defaultAvatar})`}} />
           <View className='info'>
             <View className='name'>
-              {detailData.authorName}
+              {detailData.authorName || '匿名用户'}
             </View>
             <View className='info-bottom'>
               <View className='time'>{helper.formatTime(detailData.publishTime, 'Y-M-D h:m')}</View>
@@ -124,7 +127,10 @@ class Detail extends Taro.Component {
             })
           }
         </View>
-        <View className='custom-block'>
+        <View className='loading'>
+          -- 我是有底线的 --
+        </View>
+        <View className='custom-block hiddenItem'>
           <View className='tab-list'>
             <View onClick={this.changeTab.bind(this, 'comment')} className={`tab-item ${currentTab === 'comment' ? 'active' : ''}`}>评论</View>
             <View onClick={this.changeTab.bind(this, 'like')} style={{display: 'none'}} className={`tab-item ${currentTab === 'like' ? 'active' : ''}`}>点赞</View>
@@ -159,14 +165,14 @@ class Detail extends Taro.Component {
             }
 
             {
-              !loading && list.length > 0 && (
+              !loading && commentList.length > 0 && (
                 <View className='loading'>
                   -- 我是有底线的 --
                 </View>
               )
             }
             {
-              !loading && list.length < 1 && (
+              !loading && commentList.length < 1 && (
                 <View className='loading'>
                   -- 还没有人评论哦 --
                 </View>
@@ -190,7 +196,7 @@ class Detail extends Taro.Component {
           <View className='action-item van-icon van-icon-share'>
             <Button openType='share' className='share-opacity' />
           </View>
-          <View onClick={this.goComment} className='action-comment'>评论</View>
+          <View onClick={this.goComment} className='action-comment hiddenItem'>评论</View>
         </View>
       </View>
     )

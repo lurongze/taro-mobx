@@ -24,6 +24,7 @@ class App extends Component {
       'pages/user/index',
       'pages/user/like-list',
       'pages/user/collect-list',
+      'pages/user/gallery-list',
       'pages/user-score/index'
     ],
     window: {
@@ -34,20 +35,20 @@ class App extends Component {
     },
     tabBar: {
       color: '#606266',
-      selectedColor: '#FF0099',
+      selectedColor: '#FF99CC',
       borderStyle: 'black',
       backgroundColor: '#ffffff',
       list: [
         {
           pagePath: 'pages/index/index',
-          iconPath: 'assets/images/tab/home.jpg',
-          selectedIconPath: 'assets/images/tab/home.jpg',
+          iconPath: 'assets/images/tab/home.png',
+          selectedIconPath: 'assets/images/tab/home-x.png',
           text: '首页'
         },
         {
           pagePath: 'pages/user/index',
-          iconPath: 'assets/images/tab/user.jpg',
-          selectedIconPath: 'assets/images/tab/user.jpg',
+          iconPath: 'assets/images/tab/user.png',
+          selectedIconPath: 'assets/images/tab/user-x.png',
           text: '我的'
         }
       ]

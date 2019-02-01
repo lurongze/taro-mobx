@@ -3,11 +3,10 @@
 .comment-desc {
   display: flex;
   width: 100%;
-  padding: 0 15px;
+  padding: 35px 15px;
   box-sizing: border-box;
   border-bottom: 1px solid #e5e5e5;
   justify-content: space-between;
-  margin-top: 50px;
 
   & .avatar {
     height: 0;
@@ -24,7 +23,7 @@
     line-height: 1.2rem;
 
     & .name {
-      color: #FF0099;
+      color: #FF99CC;
     }
   }
 

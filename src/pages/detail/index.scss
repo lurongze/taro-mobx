@@ -27,8 +27,8 @@ page{
     flex: 1;
 
     & .level {
-      color: #FF0099;
-      border: 1px solid #FF0099;
+      color: #FF99CC;
+      border: 1px solid #FF99CC;
       border-radius: 4px;
       padding: 0 10px;
       font-size: 20px;
@@ -125,7 +125,7 @@ page{
       color: #606266;
       border-bottom: 8px solid #ffffff;
       &.active {
-        border-bottom: 8px solid #FF0099;
+        border-bottom: 8px solid #FF99CC;
       }
     }
   }
@@ -193,7 +193,7 @@ page{
           line-height: 1.2rem;
           margin-top: 15px;
           & .comment-to {
-            color: #FF0099;
+            color: #FF99CC;
           }
         }
       }

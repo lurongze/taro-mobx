@@ -23,13 +23,18 @@ export default class SwiperImg extends Taro.Component {
   //   })
   // }
 
+  urlTo = (url) => {
+    Taro.navigateTo({
+      url
+    })
+  }
 
   render () {
 
     let { imgData } = this.props
     // const { swiperHeight: swiperHeight } = this.state
 
-    return (
+    return imgData.length && (
       <Swiper
         className='slide'
         // style={{height: `${swiperHeight}px`}}
@@ -40,11 +45,11 @@ export default class SwiperImg extends Taro.Component {
         {
           imgData && imgData.map((item) => {
             return (
-              <SwiperItem key={item}>
+              <SwiperItem key={item.id} onClick={this.urlTo.bind(this, `/pages/detail/index?id=${item.id}`)}>
                 <Image
                   // onLoad={this.swiperLoad}
                   // style={{height: `${swiperHeight}px`, width: '100%'}}
-                  src={item}
+                  src={item.link}
                   mode='aspectFill'
                 />
               </SwiperItem>

@@ -1,10 +1,12 @@
 import Taro from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
+import withLogin from '../../hoc/withLogin'
 import './index.scss'
 
 @inject('userStore', 'commonStore')
 @observer
+@withLogin()
 class user extends Taro.Component {
 
   config = {

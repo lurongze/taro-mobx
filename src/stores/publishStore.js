@@ -9,8 +9,15 @@ configure({ enforceActions: 'always' })
 class publishStore {
 
   @observable categories = [
-    { id: 1, name: 'COS图片' },
-    { id: 2, name: '二次元美图' }
+    { id: 1, name: 'COSPLAY' },
+    { id: 2, name: '二次元' },
+    { id: 3, name: '生活' },
+    { id: 4, name: '风景' },
+    { id: 5, name: '人物' },
+    { id: 6, name: '手绘' },
+    { id: 7, name: '壁纸' },
+    { id: 8, name: '美图' },
+    { id: 9, name: '动漫' },
   ]
 
   @observable galleryData = {}
@@ -65,10 +72,15 @@ class publishStore {
   @action.bound submit = async () => {
     Taro.showLoading()
     let galleryData = {...{}, ...this.galleryData}
+
+    const cate = this.categories.find((item)=>{
+      return item.id === this.category
+    })
+
     galleryData.author = commonStore.loginUser.id
     galleryData.title = this.textAreaValue
     galleryData.covers = this.pictureList.join(',')
-    galleryData.category = this.category
+    galleryData.category = cate.name || ''
     const pictureList = this.pictureList
     let cover = []
     for(let i=0;i<pictureList.length; i++ ) {
